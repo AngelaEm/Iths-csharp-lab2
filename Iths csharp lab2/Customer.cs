@@ -19,8 +19,6 @@ namespace Iths_csharp_lab2
 
         public string Password { get { return _password; } private set { _password = value; } }
 
-        public int ID { get; set; }
-
         public double TotalPrice { get; set; }
 
         // Lists
@@ -38,7 +36,6 @@ namespace Iths_csharp_lab2
                 Password = password;
                 Cart = new List<Product>();
                 ListWithCustomers.Add(this);
-                
 
             }
             else
@@ -65,11 +62,11 @@ namespace Iths_csharp_lab2
 
         public static Customer LogIn(string userName, string password)
         {
+            
             foreach (Customer customer in ListWithCustomers)
             {
                 if (customer.UserName == userName && customer.Password == password)
                 {
-                    customer.ID = ListWithCustomers.IndexOf(customer);
                     Console.WriteLine($"\nWelcome {customer.UserName}!");
                     Console.ReadKey();
                     return customer;
@@ -94,24 +91,19 @@ namespace Iths_csharp_lab2
         {
             string user = $"Username: {UserName}\nPassword: {Password}\nCart:\n";
             string inCart = string.Join("\n", Cart.Select(product => product.ToString()));
-            return user + "\n" + inCart + "\n****************************\n";
+            return user + "\n" + inCart + "\n\n****************************\n";
         }
 
         public List<Product> GetCart()
         {
             return Cart;
         }
-
-        public List<Customer> GetCustomers()
+      
+        public static Customer GetCustomer(string userName, string password)
         {
-            return ListWithCustomers;
-        }
-
-        public static Customer GetCustomerByID(int ID)
-        {
-            foreach (var customer in ListWithCustomers)
+            foreach (Customer customer in ListWithCustomers)
             {
-                if (customer.ID == ID)
+                if (customer.UserName == userName && customer.Password == password)
                 {
                     return customer;
                 }

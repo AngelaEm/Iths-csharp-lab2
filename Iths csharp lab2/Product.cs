@@ -33,7 +33,7 @@ namespace Iths_csharp_lab2
         // Methods
         public override string ToString()
         {
-            return ProductName + "    " + Price;
+            return ProductName + "     " + Price;
         }
 
         
