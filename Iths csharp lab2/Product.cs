@@ -22,7 +22,11 @@ namespace Iths_csharp_lab2
         public static List<Product> listWithProducts = new List<Product>();
 
 
-        // Constructor
+        /// <summary>
+        /// Initalize a new product with productname and price and add product to list.
+        /// </summary>
+        /// <param name="productName">Name of the product</param>
+        /// <param name="price">Price of the product</param>
         public Product(string productName, double price)
         {
             ProductName = productName;
@@ -30,7 +34,10 @@ namespace Iths_csharp_lab2
             listWithProducts.Add(this);         
         }
 
-        // Methods
+        /// <summary>
+        /// Displays information about product
+        /// </summary>
+        /// <returns>Product name and price</returns>
         public override string ToString()
         {
             return ProductName + "     " + Price;

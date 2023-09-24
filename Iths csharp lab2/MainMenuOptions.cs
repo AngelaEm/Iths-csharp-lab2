@@ -8,6 +8,9 @@ namespace Iths_csharp_lab2
 {
     internal class MainMenuOptions
     {
+        /// <summary>
+        /// Displays options for user to log in, register or exit and option for admin to log in 
+        /// </summary>
         public static void MainMenu()
         {
 
@@ -90,6 +93,10 @@ namespace Iths_csharp_lab2
             }
         }
 
+
+        /// <summary>
+        /// Allows new customers to register.
+        /// </summary>
         static void Register()
         {
             Console.Clear();
@@ -116,6 +123,10 @@ namespace Iths_csharp_lab2
             }
         }
 
+
+        /// <summary>
+        /// Allows customer members to log in
+        /// </summary>
         static void CustomerLogIn()
         {
             Console.WriteLine();

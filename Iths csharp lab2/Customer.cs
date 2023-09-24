@@ -21,13 +21,19 @@ namespace Iths_csharp_lab2
 
         public double TotalPrice { get; set; }
 
+        public MembershipLevel MembershipLevel { get; set; }
+
         // Lists
         private List<Product> Cart = new List<Product>();
 
-        private static List<Customer> ListWithCustomers = new List<Customer>();  
+        private static List<Customer> ListWithCustomers = new List<Customer>();
 
 
-        // Constructor
+        /// <summary>
+        /// Initalize a new customer with username, password shoppingcart and add customer to list with customers..
+        /// </summary>
+        /// <param name="userName">Customers username</param>
+        /// <param name="password">Customers password</param>
         public Customer(string userName, string password)
         { 
             if(IsNewCustomer(userName))
@@ -47,7 +53,11 @@ namespace Iths_csharp_lab2
         }
         
         
-        // Methods
+        /// <summary>
+        /// Iterates trough list to see if customer is a new customer.
+        /// </summary>
+        /// <param name="userName">Username to control.</param>
+        /// <returns>true if user is new user and false if username exists.</returns>
         private bool IsNewCustomer(string userName)
         {
             foreach (Customer customer in ListWithCustomers)
@@ -60,6 +70,13 @@ namespace Iths_csharp_lab2
             return true;
         }
 
+
+        /// <summary>
+        /// Controls if username matches password and let customer log in if they match.
+        /// </summary>
+        /// <param name="userName">Name of the customer.</param>
+        /// <param name="password">Password of the customer.</param>
+        /// <returns>Customer if username and password match and null if they dont match.</returns>
         public static Customer LogIn(string userName, string password)
         {
             
@@ -76,6 +93,10 @@ namespace Iths_csharp_lab2
             return null;
         }
 
+
+        /// <summary>
+        /// Displays all customers, their passwords and their cart.
+        /// </summary>
         public static void PrintAllCustomers()
         {
             foreach (Customer customer in ListWithCustomers)
@@ -87,6 +108,11 @@ namespace Iths_csharp_lab2
             Console.ReadKey();
         }
 
+
+        /// <summary>
+        /// Returns a string with users username, password and cart.
+        /// </summary>
+        /// <returns>string with users username, password and cart.</returns>
         public override string ToString()
         {
             string user = $"Username: {UserName}\nPassword: {Password}\nCart:\n";
@@ -94,21 +120,16 @@ namespace Iths_csharp_lab2
             return user + "\n" + inCart + "\n\n****************************\n";
         }
 
+
+        /// <summary>
+        /// Get the customers shopping cart.
+        /// </summary>
+        /// <returns>A list with products.</returns>
         public List<Product> GetCart()
         {
             return Cart;
         }
-      
-        public static Customer GetCustomer(string userName, string password)
-        {
-            foreach (Customer customer in ListWithCustomers)
-            {
-                if (customer.UserName == userName && customer.Password == password)
-                {
-                    return customer;
-                }
-            }
-            return null;
-        }
+        
+       
     }
 }

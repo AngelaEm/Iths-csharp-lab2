@@ -8,6 +8,10 @@ namespace Iths_csharp_lab2
 {
     internal class UserMenuOptions
     {
+        /// <summary>
+        /// Displays options for shopping, viewing cart and paying for user.
+        /// </summary>
+        /// <param name="customer">The logged in customer.</param>
         public static void UserMenu(Customer customer)
         {
             int menuSelected = 0;
@@ -24,7 +28,6 @@ namespace Iths_csharp_lab2
                 Console.CursorVisible = false;
 
                 //Menuoptions for shopping
-
                 string[] menuChoice = { "Shop", "See cart", "Pay", "Back to menu" };
 
                 Console.WriteLine($"{(menuSelected == 0 ? color : "      ")}{menuChoice[0]}\u001b[0m");
@@ -88,6 +91,11 @@ namespace Iths_csharp_lab2
             }
         }
 
+
+        /// <summary>
+        /// Displays options to buy different products 
+        /// </summary>
+        /// <param name="customer">The logged in customer.</param>
         static void ProductMenu(Customer customer)
         {
 
@@ -111,84 +119,93 @@ namespace Iths_csharp_lab2
 
                 Console.WriteLine("\n*************************\n");
 
-                try
+                string menuSelected = Console.ReadLine();
+
+                // Options for adding products to cart
+                switch (menuSelected)
                 {
-                    int menuSelected = Convert.ToInt32(Console.ReadLine());
+                    case "1":
 
-                    switch (menuSelected)
-                    {
-                        case 1:
+                        AddToCart(Product.listWithProducts[0], customer);
 
-                            AddToCart(Product.listWithProducts[0], customer);
+                        break;
 
-                            break;
+                    case "2":
 
-                        case 2:
-
-                            AddToCart(Product.listWithProducts[1], customer);
+                        AddToCart(Product.listWithProducts[1], customer);
 
 
-                            break;
+                        break;
 
 
-                        case 3:
+                    case "3":
 
-                            AddToCart(Product.listWithProducts[2], customer);
-
-
-                            break;
-
-                        case 4:
-
-                            AddToCart(Product.listWithProducts[3], customer);
+                        AddToCart(Product.listWithProducts[2], customer);
 
 
-                            break;
+                        break;
 
-                        case 5:
+                    case "4":
 
-                            Console.WriteLine("\nReturning to the logged in menu.");
-                            Console.ReadKey();
-                            run = false;
+                        AddToCart(Product.listWithProducts[3], customer);
 
-                            break;
 
-                        default:
+                        break;
 
-                            Console.WriteLine("Invalid number. Please select 1-5.");
-                            Console.ReadKey();
+                    case "5":
 
-                            break;
+                        Console.WriteLine("\nReturning to the logged in menu.");
+                        Console.ReadKey();
+                        run = false;
 
-                    }
+                        break;
+
+                    default:
+
+                        Console.WriteLine("Invalid number. Please select 1-5.");
+                        Console.ReadKey();
+
+                        break;
+
                 }
-                catch (Exception)
-                {
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    Console.ReadKey();
-                }
-
             }
         }
 
+
+        /// <summary>
+        /// Adds product to customers cart and updates totalPrice.
+        /// </summary>
+        /// <param name="product">The product to be added</param>
+        /// <param name="customer">The logged in customer</param>
         static void AddToCart(Product product, Customer customer)
         {
-
+            // Add product to cart
             customer.GetCart().Add(product);
+
+            // Uppdates totalPrice
             customer.TotalPrice += product.Price;
+
+            // Print what user bought
             Console.WriteLine($"You bought {product.ProductName}. Press enter to continue shopping.");
             Console.ReadKey();
         }
 
+
+        /// <summary>
+        /// Displays customers shopping cart with products, number of products, price and total price.
+        /// </summary>
+        /// <param name="customer">The logged in user</param>
         static void PrintCart(Customer customer)
         {
 
             Console.WriteLine("\n***************************\n");
             Console.WriteLine("This is currently in your cart:\n");
 
+            // Group the products in cart by name and price.
             var groupedCart = customer.GetCart().GroupBy(product => new { product.ProductName, product.Price });
             int totalCount = 0;
 
+            // Displays details about the grouped cart.
             foreach (var group in groupedCart)
             {
                 string productName = group.Key.ProductName;
