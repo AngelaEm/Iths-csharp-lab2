@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Iths_csharp_lab2
 {
@@ -28,8 +29,7 @@ namespace Iths_csharp_lab2
                 _userName = userName;
                 _password = password;
                 _shoppingCart = new List<Product>();
-                ListWithCustomers.Add(this);
-
+                
             }
             else
             {
@@ -61,12 +61,11 @@ namespace Iths_csharp_lab2
 
         }
 
-        private static List<Customer> ListWithCustomers = new List<Customer>();
+        public static List<Customer> ListWithMembers = new List<Customer>();
 
  
+       // Methods
        
-        
-        
         /// <summary>
         /// Iterates trough list to see if customer is a new customer.
         /// </summary>
@@ -74,7 +73,7 @@ namespace Iths_csharp_lab2
         /// <returns>true if user is new user and false if username exists.</returns>
         private bool IsNewCustomer(string userName)
         {
-            foreach (Customer customer in ListWithCustomers)
+            foreach (Customer customer in ListWithMembers)
             {
                if (customer.UserName == userName)
                {
@@ -85,58 +84,10 @@ namespace Iths_csharp_lab2
         }
 
 
-        /// <summary>
-        /// Controls if username matches password and let customer log in if they match.
-        /// </summary>
-        /// <param name="userName">Name of the customer.</param>
-        /// <param name="password">Password of the customer.</param>
-        /// <returns>Customer if username and password match and null if they dont match.</returns>
-        public static Customer LogIn(string userName, string password)
-        {
-            
-            foreach (Customer customer in ListWithCustomers)
-            {
-                if (customer.UserName == userName && customer.Password == password)
-                {
-                    Console.WriteLine($"\nWelcome {customer.UserName}!");
-                    Console.ReadKey();
-                    return customer;
-                }
-            }
-            Console.WriteLine($"\nSorry {userName}. Username and password dont match.\n");
-            return null;
-        }
+        
 
 
-       
-
-
-        /// <summary>
-        /// Displays all customers, their passwords and their cart.
-        /// </summary>
-        public static void PrintAllCustomers()
-        {
-            foreach (Customer customer in ListWithCustomers)
-            {
-                
-                Console.WriteLine(customer.ToString()); 
-                
-            }
-            Console.ReadKey();
-        }
-
-
-        /// <summary>
-        /// Returns a string with users username, password and cart.
-        /// </summary>
-        /// <returns>string with users username, password and cart.</returns>
-        public override string ToString()
-        {
-            string user = $"Username: {UserName}\nPassword: {Password}\nCart:\n";
-            string inCart = string.Join("\n", ShoppingCart.Select(product => product.ToString()));
-            return user + "\n" + inCart + "\n\n****************************\n";
-        }
-
+        
 
         /// <summary>
         /// Get the customers shopping cart.

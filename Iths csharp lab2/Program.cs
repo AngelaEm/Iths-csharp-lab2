@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Dynamic;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
+using System.IO;
 
 
 namespace Iths_csharp_lab2
@@ -29,9 +30,8 @@ namespace Iths_csharp_lab2
         /// </summary>
         static void Start()
         {
-            Console.BackgroundColor = ConsoleColor.Cyan;
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.CursorVisible = false;
             Console.WriteLine("********************************\n");
             Console.WriteLine("Welcome to this awesome webshop!");
@@ -41,9 +41,11 @@ namespace Iths_csharp_lab2
             Console.ReadKey();
             Console.ResetColor();
 
-            Customer kund1 = new Customer("Knatte", "123");
-            Customer kund2 = new Customer("Fnatte", "321");
-            Customer kund3 = new Customer("Tjatte", "213");
+           
+
+            Member Knatte = new Member("Knatte", "123", Member.MembershipLevel.Gold);
+            Member Fratte = new Member("Fnatte", "321", Member.MembershipLevel.Silver);
+            Member Tjatte = new Member("Tjatte", "213", Member.MembershipLevel.Bronze);
 
             Product redBull = new Product("Red Bull", 13.95);
             Product colaZero = new Product("Cola Zero", 9.95);

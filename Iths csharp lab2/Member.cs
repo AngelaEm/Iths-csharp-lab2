@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+
 
 namespace Iths_csharp_lab2
 {
@@ -16,38 +18,98 @@ namespace Iths_csharp_lab2
             None = 0,
         }
 
-        public MembershipLevel Level { get; set;}
+        private MembershipLevel _level;
+
+        public MembershipLevel Level
+        {
+            get { return _level; }
+            private set { _level = value; }
+        }
 
         public Member(string userName, string password, MembershipLevel level)
             : base(userName, password)
         {
             
             Level = level;
+            ListWithMembers.Add(this);
         }
 
-        private static double BonusDiscount(Customer customer, MembershipLevel membershipLevel)
+        /// <summary>
+        /// Controls if username matches password and let customer log in if they match.
+        /// </summary>
+        /// <param name="userName">Name of the customer.</param>
+        /// <param name="password">Password of the customer.</param>
+        /// <returns>Customer if username and password match and null if they dont match.</returns>
+        public static Member LogIn(string userName, string password)
+        {
+
+            foreach (Member member in ListWithMembers)
+            {
+                if (member.UserName == userName && member.Password == password)
+                {
+                    Console.WriteLine($"\nWelcome {member.UserName}!");
+                    Console.ReadKey();
+                    return member;
+                }
+            }
+            Console.WriteLine($"\nSorry {userName}. Username and password dont match.\n");
+            return null;
+        }
+
+
+        /// <summary>
+        /// Displays all customers, their passwords and their cart.
+        /// </summary>
+        public static void PrintAllMembers()
+        {
+            foreach (Member member in ListWithMembers)
+            {
+
+                Console.WriteLine(member.ToString());
+
+            }
+            Console.ReadKey();
+        }
+
+
+        /// <summary>
+        /// Returns a string with users username, password and cart.
+        /// </summary>
+        /// <returns>string with users username, password and cart.</returns>
+        public override string ToString()
+        {
+            string user = $"Username: {UserName}\nPassword: {Password}\nCart:\n";
+            string inCart = string.Join("\n", ShoppingCart.Select(product => product.ToString()));
+            return user + "\n" + inCart + "\n\n****************************\n";
+        }
+
+
+
+        public double BonusDiscount(Member member)
         {
 
             double discountPrice = 0;
 
-            
-
-            if (membershipLevel == MembershipLevel.Gold)
+            switch (Level)
             {
-                discountPrice = Gold(customer.TotalPrice);
-            }
-            else if (membershipLevel == MembershipLevel.Silver)
-            {
-                discountPrice = Silver(customer.TotalPrice);
-            }
-            else if (membershipLevel == MembershipLevel.Bronze)
-            {
-                discountPrice = Bronze(customer.TotalPrice);
-            }
+                case MembershipLevel.Gold:
 
+                    return Gold(member.TotalPrice);
 
-            return discountPrice;
+                case MembershipLevel.Silver:
+
+                    return Silver(member.TotalPrice);
+
+                case MembershipLevel.Bronze:
+
+                    return Bronze(member.TotalPrice);
+
+                default:
+
+                    return discountPrice;
+            }
         }
+
 
         /// <summary>
         /// Calculates new Total price after discount with Gold membership

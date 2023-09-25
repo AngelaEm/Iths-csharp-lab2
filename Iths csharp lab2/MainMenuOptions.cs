@@ -79,7 +79,7 @@ namespace Iths_csharp_lab2
                             Console.ReadKey();
                             Console.Clear();
                             Console.WriteLine("\n****************************\n");
-                            Customer.PrintAllCustomers();
+                            Member.PrintAllMembers();
 
                             break;
 
@@ -108,17 +108,58 @@ namespace Iths_csharp_lab2
             string userName = Console.ReadLine();
             Console.Write("\nEnter password: ");
             string password = Console.ReadLine();
+            Member.MembershipLevel level = Member.MembershipLevel.None;
+            Console.WriteLine("\nEnter your memberpoints 0-1000.\n");
+           
+            
+            try
+            {
+                int points = int.Parse(Console.ReadLine());
+                if (points >= 0 && points < 100)
+                {
+                    level = Member.MembershipLevel.None;
+                    Console.WriteLine("\nYou have no bonus yet. Keep shopping to get to the next level!\n");
+                }
+                else if (points >= 100 && points < 500)
+                {
+                    level = Member.MembershipLevel.Bronze;
+                    Console.WriteLine($"\nYou are {Member.MembershipLevel.Bronze} member and get a discount of {100 - (int)Member.MembershipLevel.Bronze}%.");
+                }
+                else if (points >= 500 && points < 850)
+                {
+                    level = Member.MembershipLevel.Silver;
+                    Console.WriteLine($"\nYou are {Member.MembershipLevel.Silver} member and get a discount of {100 - (int)Member.MembershipLevel.Silver}%.");
+                }
+                else if (points >= 850 && points <= 1000)
+                {
+                    level = Member.MembershipLevel.Silver;
+                    Console.WriteLine($"\nYou are {Member.MembershipLevel.Gold} member and get a discount of {100 - (int)Member.MembershipLevel.Gold}%.");
+                }
+                else
+                {
+                    Console.WriteLine("\nPlease choose a number 0-1000.");
+                }
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("Invalid choice, please write a number 0-1000");
+            }
+
+            Console.ReadKey();
 
 
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
-                Customer newCustomer = new Customer(userName, password);
+                Member newCustomer = new Member(userName, password, level);
 
                 // Save customer to textfile
                 string fileName = "C:\\Users\\Angela\\source\\repos\\Iths csharp lab2\\Iths csharp lab2\\SavedUsers.txt";
                 File.AppendAllText(fileName, $"{userName}, {password}\n");
-
-                Console.WriteLine($"\nYou are now registered. {userName}! Please press enter to get back to menu.");
+                Console.Clear();
+                Console.WriteLine("\n**************************************************************************\n");
+                Console.WriteLine($"You are now registered. {userName}! Please press enter to get back to menu.");
+                Console.WriteLine("\n**************************************************************************\n");
                 Console.ReadKey();
             }
             else
@@ -126,6 +167,8 @@ namespace Iths_csharp_lab2
                 Console.WriteLine("\nInvalid username or password! Please try again.");
                 Console.ReadKey();
             }
+
+            
         }
 
 
@@ -147,12 +190,12 @@ namespace Iths_csharp_lab2
                 string password = Console.ReadLine();
 
 
-                Customer loggedInCustomer = Customer.LogIn(userName, password);
+                Member loggedInMember = Member.LogIn(userName, password);
 
-                if (loggedInCustomer != null)
+                if (loggedInMember != null)
                 {
 
-                    UserMenuOptions.UserMenu(loggedInCustomer);
+                    UserMenuOptions.UserMenu(loggedInMember);
                     MainMenu();
                     break;
                 }

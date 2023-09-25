@@ -12,7 +12,7 @@ namespace Iths_csharp_lab2
         /// Displays options for shopping, viewing cart and paying for user.
         /// </summary>
         /// <param name="customer">The logged in customer.</param>
-        public static void UserMenu(Customer customer)
+        public static void UserMenu(Member member)
         {
             int menuSelected = 0;
             bool isMenuRunning = true;
@@ -61,7 +61,7 @@ namespace Iths_csharp_lab2
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.WriteLine("Shop");
                             Console.WriteLine("******************\n");
-                            ProductMenu(customer);
+                            ProductMenu(member);
                             Console.ResetColor();
 
                             break;
@@ -69,14 +69,14 @@ namespace Iths_csharp_lab2
                         case 1:
 
 
-                            PrintCart(customer);
+                            PrintCart(member);
                             Console.ReadKey();
 
                             break;
 
                         case 2:
 
-                            PayMethods.PayMenu(customer);                          
+                            PayMethods.CheckOut(member);                          
 
                             break;
 
@@ -96,7 +96,7 @@ namespace Iths_csharp_lab2
         /// Displays options to buy different products 
         /// </summary>
         /// <param name="customer">The logged in customer.</param>
-        static void ProductMenu(Customer customer)
+        static void ProductMenu(Member member)
         {
 
             bool run = true;
@@ -131,13 +131,13 @@ namespace Iths_csharp_lab2
                 {
                     case "1":
 
-                        AddToCart(Product.listWithProducts[0], customer);
+                        AddToCart(Product.listWithProducts[0], member);
 
                         break;
 
                     case "2":
 
-                        AddToCart(Product.listWithProducts[1], customer);
+                        AddToCart(Product.listWithProducts[1], member);
 
 
                         break;
@@ -145,14 +145,14 @@ namespace Iths_csharp_lab2
 
                     case "3":
 
-                        AddToCart(Product.listWithProducts[2], customer);
+                        AddToCart(Product.listWithProducts[2], member);
 
 
                         break;
 
                     case "4":
 
-                        AddToCart(Product.listWithProducts[3], customer);
+                        AddToCart(Product.listWithProducts[3], member);
 
 
                         break;
@@ -182,13 +182,13 @@ namespace Iths_csharp_lab2
         /// </summary>
         /// <param name="product">The product to be added</param>
         /// <param name="customer">The logged in customer</param>
-        static void AddToCart(Product product, Customer customer)
+        static void AddToCart(Product product, Member member)
         {
             // Add product to cart
-            customer.GetCart().Add(product);
+            member.GetCart().Add(product);
 
             // Uppdates totalPrice
-            customer.TotalPrice += product.Price;
+            member.TotalPrice += product.Price;
 
             // Print what user bought
             Console.WriteLine($"You bought {product.ProductName}. Press enter to continue shopping.");
@@ -200,14 +200,14 @@ namespace Iths_csharp_lab2
         /// Displays customers shopping cart with products, number of products, price and total price.
         /// </summary>
         /// <param name="customer">The logged in user</param>
-        static void PrintCart(Customer customer)
+        static void PrintCart(Member member)
         {
 
             Console.WriteLine("\n***************************\n");
             Console.WriteLine("This is currently in your cart:\n");
 
             // Group the products in cart by name and price.
-            var groupedCart = customer.GetCart().GroupBy(product => new { product.ProductName, product.Price });
+            var groupedCart = member.GetCart().GroupBy(product => new { product.ProductName, product.Price });
             int totalCount = 0;
 
             // Displays details about the grouped cart.
@@ -224,7 +224,7 @@ namespace Iths_csharp_lab2
 
             }
 
-            Console.WriteLine($"\nTotal price: {customer.TotalPrice} kr. Total number of products in cart {totalCount}");
+            Console.WriteLine($"\nTotal price: {member.TotalPrice} kr. Total number of products in cart {totalCount}");
 
         }
     }

@@ -3,59 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Iths_csharp_lab2
 {
     internal static class PayMethods
     {
 
-        public static void PayMenu(Customer customer)
+        public static void CheckOut(Member member)
         {
 
             double discountPrice = 0;
+            string[] currencyOption = { "SEK", "EUR", "USD" };
 
             Console.Clear();
 
-            Console.WriteLine($"\nWelcome to checkout {customer.UserName}!");
-            Console.WriteLine($"\nTo pay: {Math.Round(customer.TotalPrice, 4)} SEK.\n");
-            Console.WriteLine($"Please select membershiplevel: Gold, Silver, Bronze or No level.\n");
+            Console.WriteLine($"\nWelcome to checkout {member.UserName}!");
+            Console.WriteLine($"\nTo pay: {Math.Round(member.TotalPrice, 4)} SEK.\n");
 
-            Console.WriteLine($"1. {MembershipLevel.Gold}");
-            Console.WriteLine($"2. {MembershipLevel.Silver}");
-            Console.WriteLine($"3. {MembershipLevel.Bronze}");
-            Console.WriteLine($"4. No Level");
-            Console.WriteLine("\n*******************\n");
+            discountPrice = member.BonusDiscount(member);
 
-            string membershipLevel = Console.ReadLine();
+            Console.WriteLine($"To pay with discount: {discountPrice} SEK.\n");
+            Console.WriteLine("Please choose currency 1-3\n");
 
-            switch (membershipLevel)
+            for (int i = 0; i < currencyOption.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {currencyOption[i]}");
+            }
+
+            string currency = Console.ReadLine();
+            
+
+            switch (currency)
             {
                 case "1":
 
-                    //discountPrice = BonusDiscount(customer, MembershipLevel.Gold);
-                    //Console.WriteLine($"To pay with discount {100 - (int)customer.MembershipLevel}%: {discountPrice} SEK.");
-                    //Currency();
+                    Console.WriteLine(discountPrice);
+                    
                     break;
 
                 case "2":
 
-                    //discountPrice = BonusDiscount(customer, MembershipLevel.Silver);
-                    //Console.WriteLine($"To pay with discount {100 - (int)customer.MembershipLevel}%: {discountPrice} SEK.");
-                    //Currency();
+                    Console.WriteLine(ConvertToEuro(discountPrice)); 
+                    
                     break;
 
                 case "3":
 
-                    //discountPrice = BonusDiscount(customer, MembershipLevel.Bronze);
-                    //Console.WriteLine($"To pay with discount {100 - (int)customer.MembershipLevel}%: {discountPrice} SEK.");
-                    //Currency();
+                    Console.WriteLine(ConvertToDollar(discountPrice)); 
+                    
                     break;
 
                 case "4":
 
-                    //discountPrice = customer.TotalPrice;
-                    //Console.WriteLine($"No discount. Pay {discountPrice}");
-                    //Currency();
+                    
 
                     break;
 
@@ -65,12 +66,8 @@ namespace Iths_csharp_lab2
                     break;
             }
 
-            Console.WriteLine("\nPress enter to get currency options.");
+            
             Console.ReadKey();
-
-
-
-
 
         }
 
