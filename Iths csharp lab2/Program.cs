@@ -8,14 +8,18 @@ using System.Runtime.InteropServices;
 
 namespace Iths_csharp_lab2
 {
+   
     internal class Program
     {
+        static List<Customer> ListWithCustomers;
+
+
         static void Main(string[] args)
         {
-            string text = System.IO.File.ReadAllText(@"C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\SavedUsers.txt");
-            Console.WriteLine(text);
-            Console.ReadKey();
+            string FileName = "C:\\Users\\Angela\\source\\repos\\Iths csharp lab2\\Iths csharp lab2\\SavedUsers.txt";
+            ListWithCustomers = UploadCustomersFromTextFile(FileName);
             Start();
+                
             MainMenuOptions.MainMenu();
         }
 
@@ -47,6 +51,44 @@ namespace Iths_csharp_lab2
             Product tuttiFrutti = new Product("Ice cream", 19.50);
 
         }
+
+        /// <summary>
+        /// Gets customers that are saved in textfile.
+        /// </summary>
+        /// <param name="fileName">Name of textfile to read from</param>
+        /// <returns>A list of Customers saved in file</returns>
+        static List<Customer> UploadCustomersFromTextFile(string fileName)
+        {
+            List<Customer> customersInFile = new List<Customer>();
+
+            // Read all lines from textfile.
+            string[] lines = File.ReadAllLines(fileName);
+
+            // Iterates trough each line 
+            foreach (string line in lines)
+            {
+                if (!string.IsNullOrEmpty(line))
+                {
+                    // Where to split the userData
+                    string[] userData = line.Split(',');
+
+                    // To make sure there is both username and password
+                    if (userData.Length == 2)
+                    {
+                        string userName = userData[0];
+                        string password = userData[1];
+
+                        // CreateComInterfaceFlags a customer and add to list.
+                        Customer customer = new Customer(userName, password);
+                        customersInFile.Add(customer);
+                    }
+                }
+            }
+
+            return customersInFile;
+
+        }
+
 
     }
 }

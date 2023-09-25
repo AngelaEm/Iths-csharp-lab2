@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Iths_csharp_lab2
 {
-    internal class UserMenuOptions
+    internal static class UserMenuOptions
     {
         /// <summary>
         /// Displays options for shopping, viewing cart and paying for user.
@@ -62,6 +62,7 @@ namespace Iths_csharp_lab2
                             Console.WriteLine("Shop");
                             Console.WriteLine("******************\n");
                             ProductMenu(customer);
+                            Console.ResetColor();
 
                             break;
 
@@ -75,8 +76,7 @@ namespace Iths_csharp_lab2
 
                         case 2:
 
-                            PayMethods.Pay(customer);
-                            
+                            PayMethods.PayMenu(customer);                          
 
                             break;
 
@@ -108,7 +108,9 @@ namespace Iths_csharp_lab2
 
                 Console.CursorVisible = true;
 
-                Console.WriteLine("Add to cart. Press 5 to get back to menu.\n");
+                Console.WriteLine("\n*************************\n");
+                Console.WriteLine("PRODUCTS");
+                Console.WriteLine("\n*************************\n");
 
                 // Print list with products
                 for (int i = 0; i < Product.listWithProducts.Count; i++)
@@ -118,6 +120,9 @@ namespace Iths_csharp_lab2
                 }
 
                 Console.WriteLine("\n*************************\n");
+                Console.WriteLine("Press 1-4 to add product to cart.");
+                Console.WriteLine("Press 5 to get back to menu");
+                Console.WriteLine("Press enter to continue shopping.\n");
 
                 string menuSelected = Console.ReadLine();
 

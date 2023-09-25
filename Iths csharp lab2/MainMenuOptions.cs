@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Iths_csharp_lab2
 {
-    internal class MainMenuOptions
+    internal static class MainMenuOptions
     {
         /// <summary>
         /// Displays options for user to log in, register or exit and option for admin to log in 
@@ -39,7 +40,7 @@ namespace Iths_csharp_lab2
                 // Variable holding enter
                 var keyPressed = Console.ReadKey();
 
-                // If user press down key and selected option is not equal the length of the array
+                // If user press down key and selected option is not equal the length of the array -1
                 if (keyPressed.Key == ConsoleKey.DownArrow && menuSelected != menuChoices.Length - 1)
                 {
 
@@ -113,7 +114,11 @@ namespace Iths_csharp_lab2
             {
                 Customer newCustomer = new Customer(userName, password);
 
-                Console.WriteLine("\nPlease press enter to get back to menu.");
+                // Save customer to textfile
+                string fileName = "C:\\Users\\Angela\\source\\repos\\Iths csharp lab2\\Iths csharp lab2\\SavedUsers.txt";
+                File.AppendAllText(fileName, $"{userName}, {password}\n");
+
+                Console.WriteLine($"\nYou are now registered. {userName}! Please press enter to get back to menu.");
                 Console.ReadKey();
             }
             else
@@ -178,7 +183,6 @@ namespace Iths_csharp_lab2
 
                         break;
                 }
-
             }
         }
     }

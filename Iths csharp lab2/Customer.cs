@@ -12,21 +12,8 @@ namespace Iths_csharp_lab2
         // Fields
         private string _userName;
         private string _password;
-
-
-        // Properties
-        public string UserName { get { return _userName; } private set { _userName = value; } }
-
-        public string Password { get { return _password; } private set { _password = value; } }
-
-        public double TotalPrice { get; set; }
-
-        public MembershipLevel MembershipLevel { get; set; }
-
-        // Lists
-        private List<Product> Cart = new List<Product>();
-
-        private static List<Customer> ListWithCustomers = new List<Customer>();
+        private string _totalPrice;
+        private List<Product> _shoppingCart;
 
 
         /// <summary>
@@ -35,12 +22,12 @@ namespace Iths_csharp_lab2
         /// <param name="userName">Customers username</param>
         /// <param name="password">Customers password</param>
         public Customer(string userName, string password)
-        { 
-            if(IsNewCustomer(userName))
+        {
+            if (IsNewCustomer(userName))
             {
-                UserName = userName;
-                Password = password;
-                Cart = new List<Product>();
+                _userName = userName;
+                _password = password;
+                _shoppingCart = new List<Product>();
                 ListWithCustomers.Add(this);
 
             }
@@ -51,6 +38,33 @@ namespace Iths_csharp_lab2
             }
 
         }
+
+
+        // Properties
+        public string UserName
+        {
+            get { return _userName; }
+            private set { _userName = value; }
+        }
+        
+        public string Password
+        {
+            get { return _password; }
+            private set { _password = value; }
+        }
+
+        public double TotalPrice { get; set; }
+
+        public List<Product> ShoppingCart
+        {
+            get { return _shoppingCart; }
+
+        }
+
+        private static List<Customer> ListWithCustomers = new List<Customer>();
+
+ 
+       
         
         
         /// <summary>
@@ -94,6 +108,9 @@ namespace Iths_csharp_lab2
         }
 
 
+       
+
+
         /// <summary>
         /// Displays all customers, their passwords and their cart.
         /// </summary>
@@ -116,7 +133,7 @@ namespace Iths_csharp_lab2
         public override string ToString()
         {
             string user = $"Username: {UserName}\nPassword: {Password}\nCart:\n";
-            string inCart = string.Join("\n", Cart.Select(product => product.ToString()));
+            string inCart = string.Join("\n", ShoppingCart.Select(product => product.ToString()));
             return user + "\n" + inCart + "\n\n****************************\n";
         }
 
@@ -127,7 +144,7 @@ namespace Iths_csharp_lab2
         /// <returns>A list with products.</returns>
         public List<Product> GetCart()
         {
-            return Cart;
+            return ShoppingCart;
         }
         
        
