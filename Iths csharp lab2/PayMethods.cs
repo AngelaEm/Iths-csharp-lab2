@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using static Iths_csharp_lab2.Member;
+using System.Reflection.Emit;
 
 namespace Iths_csharp_lab2
 {
@@ -21,7 +23,7 @@ namespace Iths_csharp_lab2
             Console.WriteLine($"\nWelcome to checkout {member.UserName}!");
             Console.WriteLine($"\nTo pay: {Math.Round(member.TotalPrice, 4)} SEK.\n");
 
-            discountPrice = member.BonusDiscount(member);
+            discountPrice = BonusDiscount(member);
 
             Console.WriteLine($"To pay with discount: {discountPrice} SEK.\n");
             Console.WriteLine("Please choose currency 1-3\n");
@@ -38,20 +40,20 @@ namespace Iths_csharp_lab2
             {
                 case "1":
 
-                    Console.WriteLine(discountPrice);
+                    Console.WriteLine($"Pay {discountPrice} SEK.");
                     
                     break;
 
                 case "2":
 
-                    Console.WriteLine(ConvertToEuro(discountPrice)); 
+                    Console.WriteLine($"Pay {ConvertToEuro(discountPrice)} EUR."); 
                     
                     break;
 
                 case "3":
 
-                    Console.WriteLine(ConvertToDollar(discountPrice)); 
-                    
+                    Console.WriteLine($"Pay {ConvertToDollar(discountPrice)} USD.");
+
                     break;
 
                 case "4":
@@ -69,13 +71,77 @@ namespace Iths_csharp_lab2
             
             Console.ReadKey();
 
+            PayAndRemove(member, member.GetCart());
+
         }
 
 
+        public static double BonusDiscount(Member member)
+        {
+
+            double discountPrice = 0;
+
+            switch (member.Level)
+            {
+                case MembershipLevel.Gold:
+
+                    return Gold(member.TotalPrice);
+
+                case MembershipLevel.Silver:
+
+                    return Silver(member.TotalPrice);
+
+                case MembershipLevel.Bronze:
+
+                    return Bronze(member.TotalPrice);
+
+                default:
+
+                    return discountPrice;
+            }
+        }
 
 
+        /// <summary>
+        /// Calculates new Total price after discount with Gold membership
+        /// </summary>
+        /// <param name="totalPrice">Total price</param>
+        /// <returns>Total price after discount in SEK</returns>
+        private static double Gold(double totalPrice)
+        {
+            double discount = (int)MembershipLevel.Gold / 100.0;
+            double discountPrice = totalPrice * discount;
+            return Math.Round(discountPrice, 2);
+        }
 
 
+        /// <summary>
+        /// Calculates new Total price after discount with Silver membership
+        /// </summary>
+        /// <param name="totalPrice">Total price</param>
+        /// <returns>Total price after discount in SEK</returns>
+        private static double Silver(double totalPrice)
+        {
+            double discount = (int)MembershipLevel.Silver / 100.0;
+            double discountPrice = totalPrice * discount;
+            return Math.Round(discountPrice, 2);
+
+
+        }
+
+
+        /// <summary>
+        /// Calculates new Total price after discount with Bronze membership
+        /// </summary>
+        /// <param name="totalPrice">Total price</param>
+        /// <returns>Total price after discount in SEK</returns>
+        private static double Bronze(double totalPrice)
+        {
+            double discount = (int)MembershipLevel.Bronze / 100.0;
+            double discountPrice = totalPrice * discount;
+            return Math.Round(discountPrice, 2);
+
+        }
 
 
         /// <summary>
@@ -103,6 +169,35 @@ namespace Iths_csharp_lab2
             return PriceInEuro;
         }
 
+        private static void PayAndRemove(Member member, List<Product> shoppingCart)
+        {
+            Console.WriteLine("Do you want to pay or just log out?\n");           
+            Console.WriteLine("1. Pay and remove products in cart.");
+            Console.WriteLine("2. Log out");
+            string answer = Console.ReadLine();
+
+            switch (answer)
+            {
+                case "1":
+
+                    member.ShoppingCart.Clear();
+                    member.TotalPrice = 0;
+                    Console.WriteLine("Successfull, welcome back!");
+                    Console.ReadKey();
+
+                    break;
+
+                case "2":
+
+                    break;
+
+                default:
+
+                    Console.WriteLine("\nInvalid input. Please press 1-2\n");
+
+                    break;
+            }
+        }
 
     }
 }

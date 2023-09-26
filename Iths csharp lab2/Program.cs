@@ -12,15 +12,18 @@ namespace Iths_csharp_lab2
    
     internal class Program
     {
-        static List<Customer> ListWithCustomers;
+        public static List<Customer> ListWithMembers;
 
 
         static void Main(string[] args)
         {
             string FileName = "C:\\Users\\Angela\\source\\repos\\Iths csharp lab2\\Iths csharp lab2\\SavedUsers.txt";
-            ListWithCustomers = UploadCustomersFromTextFile(FileName);
+            ListWithMembers = UploadCustomersFromTextFile(FileName);
+
             Start();
-                
+
+            
+
             MainMenuOptions.MainMenu();
         }
 
@@ -80,9 +83,10 @@ namespace Iths_csharp_lab2
                         string userName = userData[0];
                         string password = userData[1];
 
+
                         // CreateComInterfaceFlags a customer and add to list.
-                        Customer customer = new Customer(userName, password);
-                        customersInFile.Add(customer);
+                        Member member = new Member(userName, password, Member.MembershipLevel.Gold);
+                        customersInFile.Add(member);
                     }
                 }
             }

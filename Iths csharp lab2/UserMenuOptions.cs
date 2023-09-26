@@ -227,5 +227,7 @@ namespace Iths_csharp_lab2
             Console.WriteLine($"\nTotal price: {member.TotalPrice} kr. Total number of products in cart {totalCount}");
 
         }
+
+        
     }
 }

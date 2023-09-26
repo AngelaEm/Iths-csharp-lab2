@@ -8,14 +8,13 @@ using System.IO;
 
 namespace Iths_csharp_lab2
 {
-    internal class Customer
+    internal abstract class Customer
     {
         // Fields
         private string _userName;
         private string _password;
         private string _totalPrice;
         private List<Product> _shoppingCart;
-
 
         /// <summary>
         /// Initalize a new customer with username, password shoppingcart and add customer to list with customers..
@@ -36,7 +35,6 @@ namespace Iths_csharp_lab2
                 Console.WriteLine("\nThis customer already exists. Try different username or password.");
                 Console.ReadKey();
             }
-
         }
 
 
@@ -83,11 +81,17 @@ namespace Iths_csharp_lab2
             return true;
         }
 
+        /// <summary>
+        /// Returns a string with users username, password and cart.
+        /// </summary>
+        /// <returns>string with users username, password and cart.</returns>
+        public override string ToString()
+        {
+            string user = $"Username: {UserName}\nPassword: {Password}\nCart:\n";
+            string inCart = string.Join("\n", ShoppingCart.Select(product => product.ToString()));
+            return user + "\n" + inCart + "\n\n****************************\n";
+        }
 
-        
-
-
-        
 
         /// <summary>
         /// Get the customers shopping cart.
@@ -96,8 +100,6 @@ namespace Iths_csharp_lab2
         public List<Product> GetCart()
         {
             return ShoppingCart;
-        }
-        
-       
+        }             
     }
 }
