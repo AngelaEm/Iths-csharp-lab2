@@ -12,57 +12,32 @@ namespace Iths_csharp_lab2
    
     internal class Program
     {
+
         public static List<Customer> ListWithMembers;
 
 
         static void Main(string[] args)
         {
+          
+            MenuManager.Start();
+
             string FileName = "C:\\Users\\Angela\\source\\repos\\Iths csharp lab2\\Iths csharp lab2\\SavedUsers.txt";
-            ListWithMembers = UploadCustomersFromTextFile(FileName);
-
-            Start();
-
+            
+            ListWithMembers = UploadMembersFromTextFile(FileName);
             
 
-            MainMenuOptions.MainMenu();
+            MenuManager.MainMenu();
+
+            
         }
-
-
-        /// <summary>
-        /// Displays welcome message and initalizes three customers and four products at start.
-        /// </summary>
-        static void Start()
-        {
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Clear();
-            Console.CursorVisible = false;
-            Console.WriteLine("********************************\n");
-            Console.WriteLine("Welcome to this awesome webshop!");
-            Console.WriteLine("\n********************************\n");
-            Console.WriteLine("Press enter to get to the menu.");
-
-            Console.ReadKey();
-            Console.ResetColor();
-
-           
-
-            Member Knatte = new Member("Knatte", "123", Member.MembershipLevel.Gold);
-            Member Fratte = new Member("Fnatte", "321", Member.MembershipLevel.Silver);
-            Member Tjatte = new Member("Tjatte", "213", Member.MembershipLevel.Bronze);
-
-            Product redBull = new Product("Red Bull", 13.95);
-            Product colaZero = new Product("Cola Zero", 9.95);
-            Product afterEight = new Product("After Eight", 49);
-            Product tuttiFrutti = new Product("Ice cream", 19.50);
-
-        }
+    
 
         /// <summary>
         /// Gets customers that are saved in textfile.
         /// </summary>
         /// <param name="fileName">Name of textfile to read from</param>
         /// <returns>A list of Customers saved in file</returns>
-        static List<Customer> UploadCustomersFromTextFile(string fileName)
+        public static List<Customer> UploadMembersFromTextFile(string fileName)
         {
             List<Customer> customersInFile = new List<Customer>();
 
@@ -77,6 +52,7 @@ namespace Iths_csharp_lab2
                     // Where to split the userData
                     string[] userData = line.Split(',');
 
+                    
                     // To make sure there is both username and password
                     if (userData.Length == 2)
                     {

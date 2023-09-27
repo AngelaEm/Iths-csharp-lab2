@@ -9,7 +9,7 @@ using System.Reflection.Emit;
 
 namespace Iths_csharp_lab2
 {
-    internal static class PayMethods
+    internal static class PaymentManager
     {
 
         public static void CheckOut(Member member)
