@@ -194,7 +194,7 @@ namespace Iths_csharp_lab2
                 Member newMember = new Member(userName, password, level);
 
                 // Save customer to textfile
-                string fileName = "C:\\Users\\Angela\\source\\repos\\Iths csharp lab2\\Iths csharp lab2\\SavedUsers.txt";
+                string fileName = "textFile.txt";
                 File.AppendAllText(fileName, $"{userName},{password},{level}\n");
 
                 Console.Clear();

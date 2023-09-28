@@ -22,9 +22,9 @@ namespace Iths_csharp_lab2
           
             MenuManager.Start();
 
-            string FileName = "C:\\Users\\Angela\\source\\repos\\Iths csharp lab2\\Iths csharp lab2\\SavedUsers.txt";
+            string fileName = "textFile.txt";
             
-            ListWithMembers = UploadMembersFromTextFile(FileName);
+            ListWithMembers = UploadMembersFromTextFile(fileName);
 
             MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
           
