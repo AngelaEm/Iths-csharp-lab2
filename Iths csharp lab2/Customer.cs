@@ -50,7 +50,7 @@ namespace Iths_csharp_lab2
 
         }
 
-        public static List<Customer> ListWithMembers = new List<Customer>();
+        
 
         // Methods       
 

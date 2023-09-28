@@ -13,7 +13,7 @@ namespace Iths_csharp_lab2
     internal class Program
     {
 
-        public static List<Customer> ListWithMembers;
+        public static List<Member> ListWithMembers;
 
 
         static void Main(string[] args)
@@ -24,9 +24,12 @@ namespace Iths_csharp_lab2
             string FileName = "C:\\Users\\Angela\\source\\repos\\Iths csharp lab2\\Iths csharp lab2\\SavedUsers.txt";
             
             ListWithMembers = UploadMembersFromTextFile(FileName);
-            
 
-            MenuManager.MainMenu();
+            string[] menuChoices = { "Log in", "Register", "Admin Login", "Exit" };
+
+            MenuManager.Menu(MenuManager.MenuDesign(menuChoices));
+
+            
 
             
         }
@@ -37,9 +40,9 @@ namespace Iths_csharp_lab2
         /// </summary>
         /// <param name="fileName">Name of textfile to read from</param>
         /// <returns>A list of Customers saved in file</returns>
-        public static List<Customer> UploadMembersFromTextFile(string fileName)
+        public static List<Member> UploadMembersFromTextFile(string fileName)
         {
-            List<Customer> customersInFile = new List<Customer>();
+            List<Member> membersInFile = new List<Member>();
 
             // Read all lines from textfile.
             string[] lines = File.ReadAllLines(fileName);
@@ -54,24 +57,44 @@ namespace Iths_csharp_lab2
 
                     
                     // To make sure there is both username and password
-                    if (userData.Length == 2)
+                    if (userData.Length == 3)
                     {
                         string userName = userData[0];
                         string password = userData[1];
+                        string level = userData[2];
+                        Member member = new Member(userName, password, Member.MembershipLevel.None);
 
+                        switch (level)
+                        {
+                            case "Gold":
 
-                        // CreateComInterfaceFlags a customer and add to list.
-                        Member member = new Member(userName, password, Member.MembershipLevel.Gold);
-                        customersInFile.Add(member);
+                                member = new Member(userName, password, Member.MembershipLevel.Gold);
+                                break;
+
+                            case "Silver":
+
+                                member = new Member(userName, password, Member.MembershipLevel.Silver);
+                                break;
+
+                            case "Bronze":
+                                member = new Member(userName, password, Member.MembershipLevel.Bronze);
+                                break;
+
+                            case "None":
+                                member = new Member(userName, password, Member.MembershipLevel.None);                
+                                break;
+
+                               
+                        }
+
+                        membersInFile.Add(member);
                     }
                 }
             }
 
-            return customersInFile;
+            return membersInFile;
 
         }
-
-
     }
 }
 

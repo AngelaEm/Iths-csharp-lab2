@@ -1,5 +1,2 @@
-﻿a,a
-Astrid,321
-d,d
-77,77
-r,r
+﻿
+Angela,123,None

@@ -37,13 +37,8 @@ namespace Iths_csharp_lab2
             Product tuttiFrutti = new Product("Ice cream", 19.50);
 
         }
-        
-        
-        
-        /// <summary>
-        /// Displays options for user to log in, register or exit and option for admin to log in 
-        /// </summary>
-        public static void MainMenu()
+
+        public static int MenuDesign(string[] menuChoices)
         {
 
             int menuSelected = 0;
@@ -57,9 +52,7 @@ namespace Iths_csharp_lab2
                 Console.WriteLine();
                 Console.CursorVisible = false;
 
-                // Menu choises
 
-                string[] menuChoices = { "Log in", "Register", "Admin Login", "Exit" };
 
                 Console.WriteLine("\nUse up and down to navigate and press enter to select.\n");
                 Console.WriteLine($"{(menuSelected == 0 ? color : "\t")}{menuChoices[0]}\u001b[0m");
@@ -67,148 +60,114 @@ namespace Iths_csharp_lab2
                 Console.WriteLine($"{(menuSelected == 2 ? color : "\t")}{menuChoices[2]}\u001b[0m");
                 Console.WriteLine($"{(menuSelected == 3 ? color : "\t")}{menuChoices[3]}\u001b[0m");
 
-                // Variable holding enter
+
                 var keyPressed = Console.ReadKey();
 
-                // If user press down key and selected option is not equal the length of the array -1
+
                 if (keyPressed.Key == ConsoleKey.DownArrow && menuSelected != menuChoices.Length - 1)
                 {
 
                     menuSelected++;
                 }
 
-                // If user press up key and selected option is more than 0
+
                 else if (keyPressed.Key == ConsoleKey.UpArrow && menuSelected > 0)
                 {
 
                     menuSelected--;
                 }
 
-                // If user press enter, check menuoption and run method 
+
                 else if (keyPressed.Key == ConsoleKey.Enter)
                 {
-                    switch (menuSelected)
-                    {
-                        case 0:
-
-                            Member.LogInMember();
-
-                            break;
-
-                        case 1:
-
-                            Member.Register();
-
-
-                            break;
-
-                        case 2:
-
-                            Console.WriteLine("\n****************************\n");
-                            Console.WriteLine("\nPress enter to see all customers, passwords and shoppingcarts.\n");
-                            Console.ReadKey();
-                            Console.Clear();
-                            Console.WriteLine("\n****************************\n");
-                            Member.PrintAllMembers();
-
-                            break;
-
-
-                        case 3:
-
-                            isRunning = false;
-
-                            break;
-                    }
+                    break;
                 }
             }
+            return menuSelected;
         }
 
-
-
-        /// <summary>
-        /// Displays options for shopping, viewing cart and paying for user.
-        /// </summary>
-        /// <param name="customer">The logged in customer.</param>
-        public static void UserMenu(Member member)
+        public static void Menu(int menuSelected)
         {
-            int menuSelected = 0;
-            bool isMenuRunning = true;
-            (int left, int top) = Console.GetCursorPosition();
-            string color = "\u001b[34m--->  ";
-
-            while (isMenuRunning)
+            switch (menuSelected)
             {
-                Console.Clear();
-                Console.WriteLine("\nWelcome\n");
-                Console.WriteLine("*************************\n");
+                case 0:
 
-                Console.CursorVisible = false;
+                    Member.LogInMember();
 
-                //Menuoptions for shopping
-                string[] menuChoice = { "Shop", "See cart", "Pay", "Back to menu" };
+                    break;
 
-                Console.WriteLine($"{(menuSelected == 0 ? color : "      ")}{menuChoice[0]}\u001b[0m");
-                Console.WriteLine($"{(menuSelected == 1 ? color : "      ")}{menuChoice[1]}\u001b[0m");
-                Console.WriteLine($"{(menuSelected == 2 ? color : "      ")}{menuChoice[2]} \u001b[0m");
-                Console.WriteLine($"{(menuSelected == 3 ? color : "      ")}{menuChoice[3]} \u001b[0m");
+                case 1:
 
-                // Variable holding enter
-                var keyPressed = Console.ReadKey();
-
-                // If user press down key and selected option is not equal the length of the array
-                if (keyPressed.Key == ConsoleKey.DownArrow && menuSelected != menuChoice.Length - 1)
-                {
-                    menuSelected++;
-                }
-
-                // If user press up key and selected option is more than 0
-                else if (keyPressed.Key == ConsoleKey.UpArrow && menuSelected > 0)
-                {
-                    menuSelected--;
-                }
-
-                // If user press enter, check menuoption and run method 
-                else if (keyPressed.Key == ConsoleKey.Enter)
-                {
-                    switch (menuSelected)
-                    {
-                        case 0:
-
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine("Shop");
-                            Console.WriteLine("******************\n");
-                            ProductMenu(member);
-                            Console.ResetColor();
-
-                            break;
-
-                        case 1:
+                    Member.Register();
 
 
-                            CartManager.PrintCart(member);
-                            Console.ReadKey();
+                    break;
 
-                            break;
+                case 2:
 
-                        case 2:
+                    Console.WriteLine("\n****************************\n");
+                    Console.WriteLine("\nPress enter to see all customers, passwords and shoppingcarts.\n");
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.WriteLine("\n****************************\n");
+                    Member.PrintAllMembers();
 
-                            PaymentManager.CheckOut(member);
+                    break;
 
-                            break;
 
-                        case 3:
+                case 3:
 
-                            isMenuRunning = false;
-
-                            break;
-
-                    }
-                }
+                    break;
             }
         }
 
+        public static void UserMenu(Member member, int menuSelected)
+        {
+            string[] menuChoice = { "Shop", "See cart", "Pay", "Back to menu" };
+
+            switch (menuSelected)
+            {
+                case 0:
+
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Shop");
+                    Console.WriteLine("******************\n");
+                    ProductMenu(member);
+                    Console.ResetColor();
+
+                    break;
+
+                case 1:
+
+
+                    CartManager.PrintCart(member);
+                    Console.ReadKey();
+                    MenuManager.UserMenu(member, MenuManager.MenuDesign(menuChoice));
+                    
+
+                    break;
+
+                case 2:
+
+                    PaymentManager.CheckOut(member);                 
+                    MenuManager.UserMenu(member, MenuManager.MenuDesign(menuChoice));
+
+                    break;
+
+                case 3:
+
+                    string[] menuChoices = { "Log in", "Register", "Admin Login", "Exit" };
+                    MenuManager.Menu(MenuManager.MenuDesign(menuChoices));
+
+                    break;
+
+            }
+           
+            
+        }
+
+     
 
         /// <summary>
         /// Displays options to buy different products 
@@ -280,6 +239,9 @@ namespace Iths_csharp_lab2
                         Console.WriteLine("\nReturning to the logged in menu.");
                         Console.ReadKey();
                         run = false;
+                        string[] menuChoice = { "Shop", "See cart", "Pay", "Back to menu" };
+
+                        MenuManager.UserMenu(member, MenuManager.MenuDesign(menuChoice));
 
                         break;
 

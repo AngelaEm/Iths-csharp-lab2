@@ -20,7 +20,7 @@ namespace Iths_csharp_lab2
 
         private MembershipLevel _level;
 
-        
+        public static List<Member> ListWithMembers = new List<Member>();
 
         public MembershipLevel Level
         {
@@ -81,8 +81,9 @@ namespace Iths_csharp_lab2
 
                 if (loggedInMember != null)
                 {
-
-                    MenuManager.UserMenu(loggedInMember);
+                    string[] menuChoice = { "Shop", "See cart", "Pay", "Back to menu" };
+                    
+                    MenuManager.UserMenu(loggedInMember, MenuManager.MenuDesign(menuChoice));
 
                     break;
                 }
@@ -129,7 +130,7 @@ namespace Iths_csharp_lab2
             Console.Write("\nEnter username: ");
             string userName = Console.ReadLine();
 
-            foreach (Customer member in Customer.ListWithMembers)
+            foreach (Member member in Member.ListWithMembers)
             {
                 if (member.UserName == userName)
                 {
@@ -188,7 +189,7 @@ namespace Iths_csharp_lab2
 
                 // Save customer to textfile
                 string fileName = "C:\\Users\\Angela\\source\\repos\\Iths csharp lab2\\Iths csharp lab2\\SavedUsers.txt";
-                File.AppendAllText(fileName, $"{userName},{password}\n");
+                File.AppendAllText(fileName, $"{userName},{password},{level}\n");
 
                 Console.Clear();
                 Console.WriteLine("\n**************************************************************************\n");

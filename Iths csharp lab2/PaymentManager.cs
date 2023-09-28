@@ -25,7 +25,7 @@ namespace Iths_csharp_lab2
 
             discountPrice = BonusDiscount(member);
 
-            Console.WriteLine($"To pay with discount: {discountPrice} SEK.\n");
+            Console.WriteLine($"To pay as {member.Level}-member: {discountPrice} SEK.\n");
             Console.WriteLine("Please choose currency 1-3\n");
 
             for (int i = 0; i < currencyOption.Length; i++)
@@ -56,11 +56,6 @@ namespace Iths_csharp_lab2
 
                     break;
 
-                case "4":
-
-                    
-
-                    break;
 
                 default:
 
@@ -94,6 +89,10 @@ namespace Iths_csharp_lab2
                 case MembershipLevel.Bronze:
 
                     return Bronze(member.TotalPrice);
+
+                case MembershipLevel.None:
+                    
+                    return member.TotalPrice;
 
                 default:
 
