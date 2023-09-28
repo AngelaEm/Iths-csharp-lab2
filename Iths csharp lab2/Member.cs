@@ -20,7 +20,7 @@ namespace Iths_csharp_lab2
 
         private MembershipLevel _level;
 
-        public static List<Member> ListWithMembers = new List<Member>();
+        
 
         public MembershipLevel Level
         {
@@ -28,12 +28,11 @@ namespace Iths_csharp_lab2
             private set { _level = value; }
         }
 
-        public Member(string userName, string password, MembershipLevel level)
-            : base(userName, password)
-        {
-            
+        public Member(string userName, string password, MembershipLevel level) : base(userName, password)
+
+        {          
             Level = level;
-            ListWithMembers.Add(this);
+            ListWithCustomers.Add(this);
         }
 
 
@@ -46,7 +45,7 @@ namespace Iths_csharp_lab2
         public static Member TestIfMemberExist(string userName, string password)
         {
 
-            foreach (Member member in ListWithMembers)
+            foreach (Member member in ListWithCustomers)
             {
                 if (member.UserName == userName && member.Password == password)
                 {
@@ -136,7 +135,7 @@ namespace Iths_csharp_lab2
             string userName = Console.ReadLine();
             string[] menuChoice = { "Shop", "See cart", "Pay", "Log out" };
 
-            foreach (Member member in Member.ListWithMembers)
+            foreach (Member member in Member.ListWithCustomers)
             {
                 if (member.UserName == userName)
                 {
@@ -222,7 +221,7 @@ namespace Iths_csharp_lab2
         /// </summary>
         public static void PrintAllMembers()
         {
-            foreach (Member member in ListWithMembers)
+            foreach (Member member in ListWithCustomers)
             {
 
                 Console.WriteLine(member.ToString());

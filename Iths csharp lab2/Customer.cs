@@ -22,7 +22,7 @@ namespace Iths_csharp_lab2
             _userName = userName;
             _password = password;
             _shoppingCart = new List<Product>();
-      
+
         }
 
         // Properties
@@ -50,7 +50,7 @@ namespace Iths_csharp_lab2
 
         }
 
-        
+        public static List<Customer> ListWithCustomers = new List<Customer>();
 
         // Methods       
 

@@ -53,9 +53,11 @@ namespace Iths_csharp_lab2
 
             int menuSelected = 0;
             bool isRunning = true;
+
+            // Variable holding the color to highligt with and an arrow
             string color = "\u001b[34m--->    ";
 
-
+            // Let user navigate through menu using "up" and "down" and select with enter
             while (isRunning)
             {
                 Console.Clear();
@@ -64,29 +66,24 @@ namespace Iths_csharp_lab2
 
                 Console.WriteLine("\nUse up and down to navigate and press enter to select.\n");
 
+                // Iterates through array to display menuchoises
                 for (int i = 0; i < menuChoices.Length; i++)
                 {
                     Console.WriteLine($"{(menuSelected == i ? color : "\t")}{menuChoices[i]}\u001b[0m");
                 }
 
-                
-
+                // Naviagte with up and down-arrows
                 var keyPressed = Console.ReadKey();
-
 
                 if (keyPressed.Key == ConsoleKey.DownArrow && menuSelected != menuChoices.Length - 1)
                 {
-
                     menuSelected++;
                 }
 
-
                 else if (keyPressed.Key == ConsoleKey.UpArrow && menuSelected > 0)
                 {
-
                     menuSelected--;
                 }
-
 
                 else if (keyPressed.Key == ConsoleKey.Enter)
                 {
@@ -121,17 +118,28 @@ namespace Iths_csharp_lab2
                 case 2:
 
                     Console.WriteLine("\n****************************\n");
-                    Console.WriteLine("\nPress enter to see all customers, passwords and shoppingcarts.\n");
-                    Console.ReadKey();
-                    Console.Clear();
-                    Console.WriteLine("\n****************************\n");
-                    Member.PrintAllMembers();                    
-                    MenuManager.MainMenu(MenuManager.MenuDesign(mainMenuChoices));
+                    Console.WriteLine("\nWrite password to see all customers, passwords and shoppingcarts.\n");
+                    Console.CursorVisible = true;
+                    string password = Console.ReadLine();
+
+                    if (password == "123")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("\n****************************\n");
+                        Member.PrintAllMembers();
+                        Console.CursorVisible = false;
+                        MenuManager.MainMenu(MenuManager.MenuDesign(mainMenuChoices));
+                    }
+
+                    Console.CursorVisible = false;
+                    Console.WriteLine("Invalid password.");
+                    Console.ReadKey();                   
+                    MenuManager.MainMenu(MenuManager.MenuDesign(mainMenuChoices));                   
 
                     break;
 
-
                 case 3:
+
                     Environment.Exit(0);
 
                     break;
