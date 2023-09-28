@@ -12,8 +12,13 @@ namespace Iths_csharp_lab2
     internal static class PaymentManager
     {
 
+        /// <summary>
+        /// Handels checkout process for logged in customer
+        /// </summary>
+        /// <param name="member">Logged in member</param>
         public static void CheckOut(Member member)
         {
+            // Runs if member has nothing to pay
             if(member.TotalPrice == 0)
             {
                 Console.Clear();
@@ -71,7 +76,7 @@ namespace Iths_csharp_lab2
                         break;
                 }
 
-                Console.WriteLine("Would you like to pay and empty your cart or du you want to get back to usermenu?Press enter to continue.");
+                Console.WriteLine("Would you like to pay and empty your cart or du you want to get back to usermenu?\nPress enter to continue.");
 
                 Console.ReadKey();
 
@@ -83,6 +88,11 @@ namespace Iths_csharp_lab2
         }
 
 
+        /// <summary>
+        /// Calculates discount depending on membershiplevel
+        /// </summary>
+        /// <param name="member">Logged in member</param>
+        /// <returns>Total proce after discount</returns>
         public static double BonusDiscount(Member member)
         {
 
@@ -180,6 +190,12 @@ namespace Iths_csharp_lab2
             return PriceInEuro;
         }
 
+
+        /// <summary>
+        /// Handles payment and removal of products.
+        /// </summary>
+        /// <param name="member">Logged in member</param>
+        /// <param name="shoppingCart">Members shoppingcart</param>
         private static void PayAndRemove(Member member, List<Product> shoppingCart)
         {
             string[] pay = new string[] { "Pay and remove products in cart.", "Get back to menu." };
@@ -194,7 +210,7 @@ namespace Iths_csharp_lab2
 
                     member.ShoppingCart.Clear();
                     member.TotalPrice = 0;
-                    Console.WriteLine("Successfull, welcome back!");
+                    Console.WriteLine("\nSuccessfull, welcome back!");
                     Console.ReadKey();
 
                     break;

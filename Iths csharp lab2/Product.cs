@@ -34,6 +34,7 @@ namespace Iths_csharp_lab2
             listWithProducts.Add(this);         
         }
 
+
         /// <summary>
         /// Displays information about product
         /// </summary>

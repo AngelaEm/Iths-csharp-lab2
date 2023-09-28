@@ -14,14 +14,10 @@ namespace Iths_csharp_lab2
         /// <param name="product">The product to be added</param>
         /// <param name="customer">The logged in customer</param>
         public static void AddToCart(Product product, Member member)
-        {
-            // Add product to cart
+        {          
             member.GetCart().Add(product);
 
-            // Uppdates totalPrice
-            member.TotalPrice += product.Price;
-
-            
+            member.TotalPrice += product.Price;           
             
         }
 
@@ -32,6 +28,7 @@ namespace Iths_csharp_lab2
         /// <param name="customer">The logged in user</param>
         public static void PrintCart(Member member)
         {
+            // Runs if cart is empty
             if (member.GetCart().Count == 0 )
             {
                 Console.Clear();

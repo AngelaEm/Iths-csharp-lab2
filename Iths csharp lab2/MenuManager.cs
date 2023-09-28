@@ -8,8 +8,10 @@ namespace Iths_csharp_lab2
 {
     internal class MenuManager
     {
+        // Arrays with mainmenu options and usermenu options
         public static string[] mainMenuChoices = { "Log in", "Register", "Admin Login", "Exit" };
         public static string[] userMenuChoices = { "Shop", "See cart", "Pay", "Log out" };
+
 
         /// <summary>
         /// Displays welcome message and initalizes three customers and four products at start.
@@ -40,6 +42,12 @@ namespace Iths_csharp_lab2
 
         }
 
+
+        /// <summary>
+        /// Displays menu with options and returns index with selected option.
+        /// </summary>
+        /// <param name="menuChoices">An array with menu options.</param>
+        /// <returns>Index of the selected option</returns>
         public static int MenuDesign(string[] menuChoices)
         {
 
@@ -88,6 +96,11 @@ namespace Iths_csharp_lab2
             return menuSelected;
         }
 
+
+        /// <summary>
+        /// Manage main menu options
+        /// </summary>
+        /// <param name="menuSelected">Index of selected option</param>
         public static void MainMenu(int menuSelected)
         {
             switch (menuSelected)
@@ -125,6 +138,12 @@ namespace Iths_csharp_lab2
             }
         }
 
+
+        /// <summary>
+        /// Manage User menu options.
+        /// </summary>
+        /// <param name="member">Logged in member</param>
+        /// <param name="menuSelected">Index of selected option</param>
         public static void UserMenu(Member member, int menuSelected)
         {
            
@@ -171,6 +190,10 @@ namespace Iths_csharp_lab2
         }
 
      
+        /// <summary>
+        /// Makes an array with products from a list with products.
+        /// </summary>
+        /// <returns>the array with products</returns>
         public static string[] GetArrayWithProducts()
         {
             string[] products = new string[Product.listWithProducts.Count+1];
@@ -188,10 +211,12 @@ namespace Iths_csharp_lab2
             return products;
         }
 
-        /// <summary>
-        /// Displays options to buy different products 
-        /// </summary>
-        /// <param name="customer">The logged in customer.</param>
+
+       /// <summary>
+       /// Mamage product menu options
+       /// </summary>
+       /// <param name="member">Logged in member</param>
+       /// <param name="menuSelected">Index of selected option</param>
         public static void ProductMenu(Member member, int menuSelected)
         {
            

@@ -1,4 +1,2 @@
 ﻿
-Angela,123,None
-x,x,None
-f,f,None
+Angela,123,Silver

@@ -26,13 +26,8 @@ namespace Iths_csharp_lab2
             
             ListWithMembers = UploadMembersFromTextFile(FileName);
 
-            string[] menuChoices = { "Log in", "Register", "Admin Login", "Exit" };
-
-            MenuManager.MainMenu(MenuManager.MenuDesign(menuChoices));
-
-            
-
-            
+            MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
+          
         }
     
 
