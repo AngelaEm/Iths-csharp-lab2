@@ -33,7 +33,10 @@ namespace Iths_csharp_lab2
             }
             else
             {
+                // Variable holding price after discount
                 double discountPrice = 0;
+
+                // Array with currecy-options
                 string[] currencyOption = { "SEK", "EUR", "USD" };
 
                 Console.Clear();
@@ -41,14 +44,17 @@ namespace Iths_csharp_lab2
                 Console.WriteLine($"\nWelcome to checkout {member.UserName}!");
                 Console.WriteLine($"\nTo pay: {Math.Round(member.TotalPrice, 4)} SEK.\n");
 
+                // Calculate members discountprice
                 discountPrice = BonusDiscount(member);
 
+                // Display discountprice
                 Console.WriteLine($"To pay as {member.Level}-member: {discountPrice} SEK.\n");
 
                 Console.WriteLine("In which currency would you like to pay?\nPress enter to continue.");
 
                 Console.ReadKey();
 
+                // Currencyoptions
                 switch (MenuManager.MenuDesign(currencyOption))
                 {
                     case 0:
@@ -81,12 +87,8 @@ namespace Iths_csharp_lab2
                 Console.ReadKey();
 
                 PayAndRemove(member, member.GetCart());
-            }
-
-           
-
+            }         
         }
-
 
         /// <summary>
         /// Calculates discount depending on membershiplevel
@@ -198,12 +200,12 @@ namespace Iths_csharp_lab2
         /// <param name="shoppingCart">Members shoppingcart</param>
         private static void PayAndRemove(Member member, List<Product> shoppingCart)
         {
+            // String holding options pay or get back
             string[] pay = new string[] { "Pay and remove products in cart.", "Get back to menu." };
                    
             Console.WriteLine();
             
-           
-
+            // Options to pay or get back to menu
             switch (MenuManager.MenuDesign(pay))
             {
                 case 0:

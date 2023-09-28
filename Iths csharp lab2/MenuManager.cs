@@ -116,7 +116,7 @@ namespace Iths_csharp_lab2
                     break;
 
                 case 2:
-
+                    // Display all members, passwords and carts to admin. Password 123
                     Console.WriteLine("\n****************************\n");
                     Console.WriteLine("\nWrite password to see all customers, passwords and shoppingcarts.\n");
                     Console.CursorVisible = true;
@@ -154,8 +154,7 @@ namespace Iths_csharp_lab2
         /// <param name="menuSelected">Index of selected option</param>
         public static void UserMenu(Member member, int menuSelected)
         {
-           
-
+            // Options for logged in member
             switch (menuSelected)
             {
                 case 0:
@@ -165,17 +164,14 @@ namespace Iths_csharp_lab2
                     Console.WriteLine("******************\n");
                     ProductMenu(member, MenuDesign(GetArrayWithProducts()));
                     
-
                     break;
 
                 case 1:
-
 
                     CartManager.PrintCart(member);
                     Console.ReadKey();
                     MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
                     
-
                     break;
 
                 case 2:
@@ -186,14 +182,12 @@ namespace Iths_csharp_lab2
                     break;
 
                 case 3:
-
                    
                     MenuManager.MainMenu(MenuManager.MenuDesign(mainMenuChoices));
 
                     break;
 
             }
-           
             
         }
 
@@ -204,18 +198,17 @@ namespace Iths_csharp_lab2
         /// <returns>the array with products</returns>
         public static string[] GetArrayWithProducts()
         {
+            // Array with products
             string[] products = new string[Product.listWithProducts.Count+1];
-
 
             for (int i = 0; i < Product.listWithProducts.Count; i++)
             {
                 products[i] = Product.listWithProducts[i].ToString();
-
             }
 
             products[Product.listWithProducts.Count] = "Exit";
-            
 
+            // Return array with products and exit
             return products;
         }
 
@@ -234,44 +227,25 @@ namespace Iths_csharp_lab2
                 case 0:
 
                     CartManager.AddToCart(Product.listWithProducts[0], member);
-                    Console.WriteLine($"\n\tAdded {Product.listWithProducts[0].ProductName}\tTotal price: {Math.Round(member.TotalPrice,2)} SEK");
-                    Console.WriteLine("\tPress enter to continue.");
-                    Console.ReadKey();
-                    MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
-
+                    
                     break;
 
                 case 1:
 
                     CartManager.AddToCart(Product.listWithProducts[1], member);
-                    Console.WriteLine($"\n\tAdded: {Product.listWithProducts[1].ProductName}\tTotal price: {Math.Round(member.TotalPrice, 2)} SEK");
-                    Console.WriteLine("\tPress enter to continue.");
-                    Console.ReadKey();
-                    MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
-
 
                     break;
 
-
                 case 2:
 
-                    CartManager.AddToCart(Product.listWithProducts[2], member);
-                    Console.WriteLine($"\n\tAdded:  {Product.listWithProducts[2].ProductName}\tTotal price: {Math.Round(member.TotalPrice, 2)} SEK");
-                    Console.WriteLine("\tPress enter to continue.");
-                    Console.ReadKey();
-                    MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
-
+                    CartManager.AddToCart(Product.listWithProducts[2], member);                  
 
                     break;
 
                 case 3:
 
                     CartManager.AddToCart(Product.listWithProducts[3], member);
-                    Console.WriteLine($"\n\tAdded:  {Product.listWithProducts[3].ProductName}\tTotal price:  {Math.Round(member.TotalPrice, 2)} SEK");
-                    Console.WriteLine("\tPress enter to continue.");
-                    Console.ReadKey();
-                    MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
-
+                    
                     break;
 
                 case 4:
@@ -282,8 +256,6 @@ namespace Iths_csharp_lab2
                     MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
 
                     break;
-
-               
 
             }
         }

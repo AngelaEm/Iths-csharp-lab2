@@ -14,11 +14,19 @@ namespace Iths_csharp_lab2
         /// <param name="product">The product to be added</param>
         /// <param name="customer">The logged in customer</param>
         public static void AddToCart(Product product, Member member)
-        {          
+        {  
+            // Add products to members cart
             member.GetCart().Add(product);
 
-            member.TotalPrice += product.Price;           
+            // Increase totalPrice
+            member.TotalPrice += product.Price;
+
+            Console.WriteLine($"\n\tAdded to cart.\tTotal price: {Math.Round(member.TotalPrice, 2)} SEK");
+            Console.WriteLine("\tPress enter to continue.");
+            Console.ReadKey();
             
+            MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
+
         }
 
 

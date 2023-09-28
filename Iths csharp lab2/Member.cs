@@ -10,6 +10,7 @@ namespace Iths_csharp_lab2
 {
     internal class Member : Customer
     {
+        // Enum membershiplevel
         public enum MembershipLevel
         {
             Gold = 85,
@@ -18,24 +19,27 @@ namespace Iths_csharp_lab2
             None = 0,
         }
 
+        // Field
         private MembershipLevel _level;
 
-        
 
-        public MembershipLevel Level
-        {
-            get { return _level; }
-            private set { _level = value; }
-        }
-
+        // Constructor
         public Member(string userName, string password, MembershipLevel level) : base(userName, password)
-
-        {          
+        {
             Level = level;
             ListWithCustomers.Add(this);
         }
 
 
+        // Property
+        public MembershipLevel Level
+        {
+            get { return _level; }
+            private set { _level = value; }
+        }
+      
+
+        // Methods
         /// <summary>
         /// Controls if username matches password and let customer log in if they match.
         /// </summary>
@@ -44,7 +48,7 @@ namespace Iths_csharp_lab2
         /// <returns>Customer if username and password match and null if they dont match.</returns>
         public static Member TestIfMemberExist(string userName, string password)
         {
-
+            // Iterates through ListWithCustomer to see if customer is a member and return member if true
             foreach (Member member in ListWithCustomers)
             {
                 if (member.UserName == userName && member.Password == password)
@@ -66,8 +70,7 @@ namespace Iths_csharp_lab2
         {
             Console.WriteLine();
             Console.CursorVisible = true;
-            bool isRunning = true;
-            
+            bool isRunning = true;          
 
             while (isRunning)
             {
@@ -76,10 +79,10 @@ namespace Iths_csharp_lab2
 
                 Console.Write("\nEnter password: ");
                 string password = Console.ReadLine();
-
-
+              
                 Member loggedInMember = Member.TestIfMemberExist(userName, password);
 
+                // Log in if user exists
                 if (loggedInMember != null)
                 {           
                     
@@ -92,6 +95,7 @@ namespace Iths_csharp_lab2
                     isRunning = false;
                 }
 
+                // If user is not a member they get the option to register
                 Console.WriteLine("Do you want to register? y/n\n");
                 string answer = Console.ReadLine();
                 answer = answer.ToLower();
@@ -114,8 +118,7 @@ namespace Iths_csharp_lab2
 
                         MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
                         Console.WriteLine("\nInvalid input. Please write y for yes or n for no.\n");
-                       
-
+  
                         break;
                 }
             }
@@ -217,22 +220,17 @@ namespace Iths_csharp_lab2
 
 
         /// <summary>
-        /// Displays all customers, their passwords and their cart.
+        /// Displays all customers, their passwords and their carts.
         /// </summary>
         public static void PrintAllMembers()
         {
             foreach (Member member in ListWithCustomers)
             {
-
                 Console.WriteLine(member.ToString());
-
             }
             Console.ReadKey();
-        }
-
-     
+        }    
 
     }
-
 }
 

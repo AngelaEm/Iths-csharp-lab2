@@ -16,7 +16,8 @@ namespace Iths_csharp_lab2
         private double _totalPrice;
         private List<Product> _shoppingCart;
 
-        
+
+        // Constructor
         public Customer(string userName, string password)
         {
             _userName = userName;
@@ -50,7 +51,9 @@ namespace Iths_csharp_lab2
 
         }
 
+        // List with customers
         public static List<Customer> ListWithCustomers = new List<Customer>();
+
 
         // Methods       
 
