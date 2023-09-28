@@ -14,59 +14,71 @@ namespace Iths_csharp_lab2
 
         public static void CheckOut(Member member)
         {
-
-            double discountPrice = 0;
-            string[] currencyOption = { "SEK", "EUR", "USD" };
-
-            Console.Clear();
-
-            Console.WriteLine($"\nWelcome to checkout {member.UserName}!");
-            Console.WriteLine($"\nTo pay: {Math.Round(member.TotalPrice, 4)} SEK.\n");
-
-            discountPrice = BonusDiscount(member);
-
-            Console.WriteLine($"To pay as {member.Level}-member: {discountPrice} SEK.\n");
-            Console.WriteLine("Please choose currency 1-3\n");
-
-            for (int i = 0; i < currencyOption.Length; i++)
+            if(member.TotalPrice == 0)
             {
-                Console.WriteLine($"{i + 1}. {currencyOption[i]}");
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n*********************************************************\n");
+                Console.WriteLine("You have nothing to pay yet. Press enter to get back to menu.");
+                Console.WriteLine("\n*********************************************************\n");
+                Console.ReadKey();
+                Console.ResetColor();
+                MenuManager.UserMenu(member, MenuManager.MenuDesign(MenuManager.userMenuChoices));
+                
+            }
+            else
+            {
+                double discountPrice = 0;
+                string[] currencyOption = { "SEK", "EUR", "USD" };
+
+                Console.Clear();
+
+                Console.WriteLine($"\nWelcome to checkout {member.UserName}!");
+                Console.WriteLine($"\nTo pay: {Math.Round(member.TotalPrice, 4)} SEK.\n");
+
+                discountPrice = BonusDiscount(member);
+
+                Console.WriteLine($"To pay as {member.Level}-member: {discountPrice} SEK.\n");
+
+                Console.WriteLine("In which currency would you like to pay?\nPress enter to continue.");
+
+                Console.ReadKey();
+
+                switch (MenuManager.MenuDesign(currencyOption))
+                {
+                    case 0:
+
+                        Console.WriteLine($"\nPay {discountPrice} SEK.\n");
+
+                        break;
+
+                    case 1:
+
+                        Console.WriteLine($"\nPay {ConvertToEuro(discountPrice)} EUR.\n");
+
+                        break;
+
+                    case 2:
+
+                        Console.WriteLine($"\nPay {ConvertToDollar(discountPrice)} USD.\n");
+
+                        break;
+
+
+                    default:
+
+                        Console.WriteLine("\nInvalid choice, please try again.\n");
+                        break;
+                }
+
+                Console.WriteLine("Would you like to pay and empty your cart or du you want to get back to usermenu?Press enter to continue.");
+
+                Console.ReadKey();
+
+                PayAndRemove(member, member.GetCart());
             }
 
-            string currency = Console.ReadLine();
-            
-
-            switch (currency)
-            {
-                case "1":
-
-                    Console.WriteLine($"Pay {discountPrice} SEK.");
-                    
-                    break;
-
-                case "2":
-
-                    Console.WriteLine($"Pay {ConvertToEuro(discountPrice)} EUR."); 
-                    
-                    break;
-
-                case "3":
-
-                    Console.WriteLine($"Pay {ConvertToDollar(discountPrice)} USD.");
-
-                    break;
-
-
-                default:
-
-                    Console.WriteLine("Invalid choice, please try again.");
-                    break;
-            }
-
-            
-            Console.ReadKey();
-
-            PayAndRemove(member, member.GetCart());
+           
 
         }
 
@@ -170,14 +182,15 @@ namespace Iths_csharp_lab2
 
         private static void PayAndRemove(Member member, List<Product> shoppingCart)
         {
-            Console.WriteLine("Do you want to pay or just log out?\n");           
-            Console.WriteLine("1. Pay and remove products in cart.");
-            Console.WriteLine("2. Log out");
-            string answer = Console.ReadLine();
+            string[] pay = new string[] { "Pay and remove products in cart.", "Get back to menu." };
+                   
+            Console.WriteLine();
+            
+           
 
-            switch (answer)
+            switch (MenuManager.MenuDesign(pay))
             {
-                case "1":
+                case 0:
 
                     member.ShoppingCart.Clear();
                     member.TotalPrice = 0;
@@ -186,7 +199,7 @@ namespace Iths_csharp_lab2
 
                     break;
 
-                case "2":
+                case 1:
 
                     break;
 

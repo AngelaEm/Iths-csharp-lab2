@@ -67,6 +67,7 @@ namespace Iths_csharp_lab2
             Console.WriteLine();
             Console.CursorVisible = true;
             bool isRunning = true;
+            
 
             while (isRunning)
             {
@@ -80,10 +81,9 @@ namespace Iths_csharp_lab2
                 Member loggedInMember = Member.TestIfMemberExist(userName, password);
 
                 if (loggedInMember != null)
-                {
-                    string[] menuChoice = { "Shop", "See cart", "Pay", "Back to menu" };
+                {           
                     
-                    MenuManager.UserMenu(loggedInMember, MenuManager.MenuDesign(menuChoice));
+                    MenuManager.UserMenu(loggedInMember, MenuManager.MenuDesign(MenuManager.userMenuChoices));
 
                     break;
                 }
@@ -105,12 +105,16 @@ namespace Iths_csharp_lab2
                         break;
 
                     case "n":
+                      
+                        MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
 
                         break;
 
                     default:
 
+                        MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
                         Console.WriteLine("\nInvalid input. Please write y for yes or n for no.\n");
+                       
 
                         break;
                 }
@@ -129,6 +133,7 @@ namespace Iths_csharp_lab2
             Console.WriteLine("************************");
             Console.Write("\nEnter username: ");
             string userName = Console.ReadLine();
+            string[] menuChoice = { "Shop", "See cart", "Pay", "Log out" };
 
             foreach (Member member in Member.ListWithMembers)
             {
@@ -196,11 +201,15 @@ namespace Iths_csharp_lab2
                 Console.WriteLine($"You are now registered. {userName}! Please press enter to get back to menu.");
                 Console.WriteLine("\n**************************************************************************\n");
                 Console.ReadKey();
+                MenuManager.UserMenu(newMember, MenuManager.MenuDesign(menuChoice));
             }
             else
             {
                 Console.WriteLine("\nInvalid username or password! Please try again.");
                 Console.ReadKey();
+                string[] menuChoices = { "Log in", "Register", "Admin Login", "Exit" };
+                MenuManager.MainMenu(MenuManager.MenuDesign(menuChoices));
+
             }
 
 

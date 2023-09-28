@@ -8,6 +8,8 @@ namespace Iths_csharp_lab2
 {
     internal class MenuManager
     {
+        public static string[] mainMenuChoices = { "Log in", "Register", "Admin Login", "Exit" };
+        public static string[] userMenuChoices = { "Shop", "See cart", "Pay", "Log out" };
 
         /// <summary>
         /// Displays welcome message and initalizes three customers and four products at start.
@@ -52,14 +54,14 @@ namespace Iths_csharp_lab2
                 Console.WriteLine();
                 Console.CursorVisible = false;
 
-
-
                 Console.WriteLine("\nUse up and down to navigate and press enter to select.\n");
-                Console.WriteLine($"{(menuSelected == 0 ? color : "\t")}{menuChoices[0]}\u001b[0m");
-                Console.WriteLine($"{(menuSelected == 1 ? color : "\t")}{menuChoices[1]}\u001b[0m");
-                Console.WriteLine($"{(menuSelected == 2 ? color : "\t")}{menuChoices[2]}\u001b[0m");
-                Console.WriteLine($"{(menuSelected == 3 ? color : "\t")}{menuChoices[3]}\u001b[0m");
 
+                for (int i = 0; i < menuChoices.Length; i++)
+                {
+                    Console.WriteLine($"{(menuSelected == i ? color : "\t")}{menuChoices[i]}\u001b[0m");
+                }
+
+                
 
                 var keyPressed = Console.ReadKey();
 
@@ -86,7 +88,7 @@ namespace Iths_csharp_lab2
             return menuSelected;
         }
 
-        public static void Menu(int menuSelected)
+        public static void MainMenu(int menuSelected)
         {
             switch (menuSelected)
             {
@@ -110,12 +112,14 @@ namespace Iths_csharp_lab2
                     Console.ReadKey();
                     Console.Clear();
                     Console.WriteLine("\n****************************\n");
-                    Member.PrintAllMembers();
+                    Member.PrintAllMembers();                    
+                    MenuManager.MainMenu(MenuManager.MenuDesign(mainMenuChoices));
 
                     break;
 
 
                 case 3:
+                    Environment.Exit(0);
 
                     break;
             }
@@ -123,18 +127,17 @@ namespace Iths_csharp_lab2
 
         public static void UserMenu(Member member, int menuSelected)
         {
-            string[] menuChoice = { "Shop", "See cart", "Pay", "Back to menu" };
+           
 
             switch (menuSelected)
             {
                 case 0:
 
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Clear();                   
                     Console.WriteLine("Shop");
                     Console.WriteLine("******************\n");
-                    ProductMenu(member);
-                    Console.ResetColor();
+                    ProductMenu(member, MenuDesign(GetArrayWithProducts()));
+                    
 
                     break;
 
@@ -143,7 +146,7 @@ namespace Iths_csharp_lab2
 
                     CartManager.PrintCart(member);
                     Console.ReadKey();
-                    MenuManager.UserMenu(member, MenuManager.MenuDesign(menuChoice));
+                    MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
                     
 
                     break;
@@ -151,14 +154,14 @@ namespace Iths_csharp_lab2
                 case 2:
 
                     PaymentManager.CheckOut(member);                 
-                    MenuManager.UserMenu(member, MenuManager.MenuDesign(menuChoice));
+                    MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
 
                     break;
 
                 case 3:
 
-                    string[] menuChoices = { "Log in", "Register", "Admin Login", "Exit" };
-                    MenuManager.Menu(MenuManager.MenuDesign(menuChoices));
+                   
+                    MenuManager.MainMenu(MenuManager.MenuDesign(mainMenuChoices));
 
                     break;
 
@@ -168,96 +171,90 @@ namespace Iths_csharp_lab2
         }
 
      
+        public static string[] GetArrayWithProducts()
+        {
+            string[] products = new string[Product.listWithProducts.Count+1];
+
+
+            for (int i = 0; i < Product.listWithProducts.Count; i++)
+            {
+                products[i] = Product.listWithProducts[i].ToString();
+
+            }
+
+            products[Product.listWithProducts.Count] = "Exit";
+            
+
+            return products;
+        }
 
         /// <summary>
         /// Displays options to buy different products 
         /// </summary>
         /// <param name="customer">The logged in customer.</param>
-        static void ProductMenu(Member member)
+        public static void ProductMenu(Member member, int menuSelected)
         {
-
-            bool run = true;
-
-            while (run)
+           
+            // Options for adding products to cart
+            switch (menuSelected)
             {
-                Console.Clear();
-                Console.WriteLine();
+                case 0:
 
-                Console.CursorVisible = true;
+                    CartManager.AddToCart(Product.listWithProducts[0], member);
+                    Console.WriteLine($"\n\tAdded {Product.listWithProducts[0].ProductName}\tTotal price: {Math.Round(member.TotalPrice,2)} SEK");
+                    Console.WriteLine("\tPress enter to continue.");
+                    Console.ReadKey();
+                    MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
 
-                Console.WriteLine("\n*************************\n");
-                Console.WriteLine("PRODUCTS");
-                Console.WriteLine("\n*************************\n");
+                    break;
 
-                // Print list with products
-                for (int i = 0; i < Product.listWithProducts.Count; i++)
-                {
-                    Console.WriteLine($"{i + 1}\t{Product.listWithProducts[i].ToString()}");
+                case 1:
 
-                }
-
-                Console.WriteLine("\n*************************\n");
-                Console.WriteLine("Press 1-4 to add product to cart.");
-                Console.WriteLine("Press 5 to get back to menu");
-                Console.WriteLine("Press enter to continue shopping.\n");
-
-                string menuSelected = Console.ReadLine();
-
-                // Options for adding products to cart
-                switch (menuSelected)
-                {
-                    case "1":
-
-                        CartManager.AddToCart(Product.listWithProducts[0], member);
-
-                        break;
-
-                    case "2":
-
-                        CartManager.AddToCart(Product.listWithProducts[1], member);
+                    CartManager.AddToCart(Product.listWithProducts[1], member);
+                    Console.WriteLine($"\n\tAdded: {Product.listWithProducts[1].ProductName}\tTotal price: {Math.Round(member.TotalPrice, 2)} SEK");
+                    Console.WriteLine("\tPress enter to continue.");
+                    Console.ReadKey();
+                    MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
 
 
-                        break;
+                    break;
 
 
-                    case "3":
+                case 2:
 
-                        CartManager.AddToCart(Product.listWithProducts[2], member);
-
-
-                        break;
-
-                    case "4":
-
-                        CartManager.AddToCart(Product.listWithProducts[3], member);
+                    CartManager.AddToCart(Product.listWithProducts[2], member);
+                    Console.WriteLine($"\n\tAdded:  {Product.listWithProducts[2].ProductName}\tTotal price: {Math.Round(member.TotalPrice, 2)} SEK");
+                    Console.WriteLine("\tPress enter to continue.");
+                    Console.ReadKey();
+                    MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
 
 
-                        break;
+                    break;
 
-                    case "5":
+                case 3:
 
-                        Console.WriteLine("\nReturning to the logged in menu.");
-                        Console.ReadKey();
-                        run = false;
-                        string[] menuChoice = { "Shop", "See cart", "Pay", "Back to menu" };
+                    CartManager.AddToCart(Product.listWithProducts[3], member);
+                    Console.WriteLine($"\n\tAdded:  {Product.listWithProducts[3].ProductName}\tTotal price:  {Math.Round(member.TotalPrice, 2)} SEK");
+                    Console.WriteLine("\tPress enter to continue.");
+                    Console.ReadKey();
+                    MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
 
-                        MenuManager.UserMenu(member, MenuManager.MenuDesign(menuChoice));
+                    break;
 
-                        break;
+                case 4:
 
-                    default:
+                    Console.WriteLine("\nReturning to the logged in menu.");
+                    Console.ReadKey();
+                    
+                    MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
 
-                        Console.WriteLine("Invalid number. Please select 1-5.");
-                        Console.ReadKey();
+                    break;
 
-                        break;
+               
 
-                }
             }
         }
-
-
-
-
     }
+
 }
+

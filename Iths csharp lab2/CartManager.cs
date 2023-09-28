@@ -21,9 +21,8 @@ namespace Iths_csharp_lab2
             // Uppdates totalPrice
             member.TotalPrice += product.Price;
 
-            // Print what user bought
-            Console.WriteLine($"You bought {product.ProductName}. Press enter to continue shopping.");
-            Console.ReadKey();
+            
+            
         }
 
 
@@ -33,7 +32,19 @@ namespace Iths_csharp_lab2
         /// <param name="customer">The logged in user</param>
         public static void PrintCart(Member member)
         {
+            if (member.GetCart().Count == 0 )
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n**************************\n");
+                Console.WriteLine("Yor cart is currently empty.");
+                Console.WriteLine("\n**************************\n");
+                Console.ReadKey();
+                Console.ResetColor();
+                MenuManager.UserMenu(member, MenuManager.MenuDesign(MenuManager.userMenuChoices));
+            }
 
+            Console.Clear();
             Console.WriteLine("\n***************************\n");
             Console.WriteLine("This is currently in your cart:\n");
 

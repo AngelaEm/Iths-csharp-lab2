@@ -9,6 +9,7 @@ using System.IO;
 
 namespace Iths_csharp_lab2
 {
+
    
     internal class Program
     {
@@ -27,7 +28,7 @@ namespace Iths_csharp_lab2
 
             string[] menuChoices = { "Log in", "Register", "Admin Login", "Exit" };
 
-            MenuManager.Menu(MenuManager.MenuDesign(menuChoices));
+            MenuManager.MainMenu(MenuManager.MenuDesign(menuChoices));
 
             
 
