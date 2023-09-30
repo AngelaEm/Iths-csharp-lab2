@@ -136,7 +136,7 @@ namespace Iths_csharp_lab2
             Console.WriteLine("************************");
             Console.Write("\nEnter username: ");
             string userName = Console.ReadLine();
-            string[] menuChoice = { "Shop", "See cart", "Pay", "Log out" };
+            
 
             foreach (Member member in Member.ListWithCustomers)
             {
@@ -199,23 +199,35 @@ namespace Iths_csharp_lab2
                 string fileName = "textFile.txt";
                 File.AppendAllText(fileName, $"{userName},{password},{level}\n");
 
-                Console.Clear();
+                
                 Console.WriteLine("\n**************************************************************************\n");
                 Console.WriteLine($"You are now registered. {userName}! Please press enter to get back to menu.");
                 Console.WriteLine("\n**************************************************************************\n");
                 Console.ReadKey();
-                MenuManager.UserMenu(newMember, MenuManager.MenuDesign(menuChoice));
+
+                
             }
             else
             {
                 Console.WriteLine("\nInvalid username or password! Please try again.");
-                Console.ReadKey();
-                string[] menuChoices = { "Log in", "Register", "Admin Login", "Exit" };
-                MenuManager.MainMenu(MenuManager.MenuDesign(menuChoices));
-
+                Console.ReadKey();              
+                
             }
 
+                // Main menu
+                MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
 
+        }
+
+        /// <summary>
+        /// Returns a string with users username, password and cart.
+        /// </summary>
+        /// <returns>string with users username, password and cart.</returns>
+        public override string ToString()
+        {
+            string user = $"Username: {UserName}\nPassword: {Password}\nMembershiplevel: {Level}\nShoppingcart:\n";
+            string inCart = string.Join("\n", ShoppingCart.Select(product => product.ToString()));
+            return user + "\n" + inCart + "\n\nTotal price:\t" + TotalPrice + "\n\n****************************\n";
         }
 
 

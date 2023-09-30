@@ -28,13 +28,7 @@ namespace Iths_csharp_lab2
 
             Console.ReadKey();
             Console.ResetColor();
-
-
-
-            Member Knatte = new Member("Knatte", "123", Member.MembershipLevel.Gold);
-            Member Fratte = new Member("Fnatte", "321", Member.MembershipLevel.Silver);
-            Member Tjatte = new Member("Tjatte", "213", Member.MembershipLevel.Bronze);
-
+           
             Product redBull = new Product("Red Bull", 13.95);
             Product colaZero = new Product("Cola Zero", 9.95);
             Product afterEight = new Product("After Eight", 49);
@@ -64,7 +58,7 @@ namespace Iths_csharp_lab2
                 Console.WriteLine();
                 Console.CursorVisible = false;
 
-                Console.WriteLine("\nUse up and down to navigate and press enter to select.\n");
+                Console.WriteLine("\nUse up and down arrows to navigate and press enter to select.\n");
 
                 // Iterates through array to display menuchoises
                 for (int i = 0; i < menuChoices.Length; i++)

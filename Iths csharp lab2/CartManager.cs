@@ -71,7 +71,7 @@ namespace Iths_csharp_lab2
 
             }
 
-            Console.WriteLine($"\nTotal price: {member.TotalPrice} kr. Total number of products in cart {totalCount}");
+            Console.WriteLine($"\nTotal price: {Math.Round(member.TotalPrice, 2)} kr. Total number of products in cart {totalCount}");
 
         }
 

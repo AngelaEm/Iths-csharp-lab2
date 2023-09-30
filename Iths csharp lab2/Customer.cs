@@ -55,18 +55,7 @@ namespace Iths_csharp_lab2
         public static List<Customer> ListWithCustomers = new List<Customer>();
 
 
-        // Methods       
-
-        /// <summary>
-        /// Returns a string with users username, password and cart.
-        /// </summary>
-        /// <returns>string with users username, password and cart.</returns>
-        public override string ToString()
-        {
-            string user = $"Username: {UserName}\nPassword: {Password}\nCart:\n";
-            string inCart = string.Join("\n", ShoppingCart.Select(product => product.ToString()));
-            return user + "\n" + inCart + "\n\n****************************\n";
-        }
+        // Method           
 
 
         /// <summary>

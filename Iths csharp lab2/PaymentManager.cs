@@ -50,7 +50,7 @@ namespace Iths_csharp_lab2
                 // Display discountprice
                 Console.WriteLine($"To pay as {member.Level}-member: {discountPrice} SEK.\n");
 
-                Console.WriteLine("In which currency would you like to pay?\nPress enter to continue.");
+                Console.WriteLine("\nPress enter to continue.");
 
                 Console.ReadKey();
 
@@ -82,7 +82,7 @@ namespace Iths_csharp_lab2
                         break;
                 }
 
-                Console.WriteLine("Would you like to pay and empty your cart or du you want to get back to usermenu?\nPress enter to continue.");
+                Console.WriteLine("\nPress enter to continue.");
 
                 Console.ReadKey();
 

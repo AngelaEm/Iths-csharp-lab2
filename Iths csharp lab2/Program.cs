@@ -8,14 +8,11 @@ using System.IO;
 
 
 namespace Iths_csharp_lab2
-{
-
-   
+{ 
     internal class Program
     {
 
         public static List<Customer> ListWithCustomers;
-
 
         static void Main(string[] args)
         {
@@ -27,7 +24,7 @@ namespace Iths_csharp_lab2
             string fileName = "textFile.txt";
             
             // Upload members from textfile to listWithCustomers
-            ListWithCustomers = UploadCustomersFromTextFile(fileName);
+            UploadCustomersFromTextFile(fileName);
 
             // Display mainmenu
             MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
@@ -40,10 +37,8 @@ namespace Iths_csharp_lab2
         /// </summary>
         /// <param name="fileName">Name of textfile to read from</param>
         /// <returns>A list of Customers saved in file</returns>
-        public static List<Customer> UploadCustomersFromTextFile(string fileName)
+        public static void UploadCustomersFromTextFile(string fileName)
         {
-
-            List<Customer> membersInFile = new List<Customer>();
 
             // Read all lines from textfile.
             string[] lines = File.ReadAllLines(fileName);
@@ -64,15 +59,14 @@ namespace Iths_csharp_lab2
                         string password = userData[1];
                         string level = userData[2];
 
-                        // Initialize new member
-                        Member member = new Member(userName, password, Member.MembershipLevel.None);
+                       
 
                         // Set member to correct level
                         switch (level)
                         {
                             case "Gold":
 
-                                member = new Member(userName, password, Member.MembershipLevel.Gold);
+                                Member member = new Member(userName, password, Member.MembershipLevel.Gold);
                                 break;
 
                             case "Silver":
@@ -87,18 +81,11 @@ namespace Iths_csharp_lab2
                             case "None":
                                 member = new Member(userName, password, Member.MembershipLevel.None);                
                                 break;
-
                                
-                        }
-
-                        // Add member to list
-                        membersInFile.Add(member);
+                        }                     
                     }
                 }
             }
-
-            return membersInFile;
-
         }
     }
 }
