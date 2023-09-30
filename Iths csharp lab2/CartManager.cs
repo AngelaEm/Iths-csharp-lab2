@@ -36,26 +36,27 @@ namespace Iths_csharp_lab2
         /// <param name="customer">The logged in user</param>
         public static void PrintCart(Member member)
         {
+            Console.Clear();
+            Console.WriteLine("\n*********************************************************\n");
+            Console.WriteLine("Your settings:\n");
             // Runs if cart is empty
             if (member.GetCart().Count == 0 )
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(member.ToString());
                 Console.WriteLine("\n**************************\n");
                 Console.WriteLine("Yor cart is currently empty.");
                 Console.WriteLine("\n**************************\n");
                 Console.ReadKey();
-                Console.ResetColor();
+                
                 MenuManager.UserMenu(member, MenuManager.MenuDesign(MenuManager.userMenuChoices));
             }
 
-            Console.Clear();
-            Console.WriteLine("\n***************************\n");
-            Console.WriteLine("This is currently in your cart:\n");
 
             // Group the products in cart by name and price.
             var groupedCart = member.GetCart().GroupBy(product => new { product.ProductName, product.Price });
             int totalCount = 0;
+
+            Console.WriteLine(member.ToString()); 
 
             // Displays details about the grouped cart.
             foreach (var group in groupedCart)
@@ -71,6 +72,7 @@ namespace Iths_csharp_lab2
 
             }
 
+            Console.WriteLine("\n*********************************************************\n");
             Console.WriteLine($"\nTotal price: {Math.Round(member.TotalPrice, 2)} kr. Total number of products in cart {totalCount}");
 
         }

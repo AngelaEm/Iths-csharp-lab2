@@ -174,7 +174,7 @@ namespace Iths_csharp_lab2
                 }
                 else if (points >= 850 && points <= 1000)
                 {
-                    level = Member.MembershipLevel.Silver;
+                    level = Member.MembershipLevel.Gold;
                     Console.WriteLine($"\nYou are {Member.MembershipLevel.Gold} member and get a discount of {100 - (int)Member.MembershipLevel.Gold}%.");
                 }
                 else
@@ -198,13 +198,7 @@ namespace Iths_csharp_lab2
                 // Save customer to textfile
                 string fileName = "textFile.txt";
                 File.AppendAllText(fileName, $"{userName},{password},{level}\n");
-
-                
-                Console.WriteLine("\n**************************************************************************\n");
-                Console.WriteLine($"You are now registered. {userName}! Please press enter to get back to menu.");
-                Console.WriteLine("\n**************************************************************************\n");
-                Console.ReadKey();
-
+                     
                 
             }
             else
@@ -219,30 +213,19 @@ namespace Iths_csharp_lab2
 
         }
 
+
         /// <summary>
         /// Returns a string with users username, password and cart.
         /// </summary>
         /// <returns>string with users username, password and cart.</returns>
         public override string ToString()
         {
-            string user = $"Username: {UserName}\nPassword: {Password}\nMembershiplevel: {Level}\nShoppingcart:\n";
-            string inCart = string.Join("\n", ShoppingCart.Select(product => product.ToString()));
-            return user + "\n" + inCart + "\n\nTotal price:\t" + TotalPrice + "\n\n****************************\n";
+            string maskedString = new string('*', Password.Length);
+            string user = $"Username: {UserName}\nPassword: {maskedString}\nMembershiplevel: {Level}\n\nShoppingcart:\n";
+           
+            return user;
+               
         }
-
-
-        /// <summary>
-        /// Displays all customers, their passwords and their carts.
-        /// </summary>
-        public static void PrintAllMembers()
-        {
-            foreach (Member member in ListWithCustomers)
-            {
-                Console.WriteLine(member.ToString());
-            }
-            Console.ReadKey();
-        }    
-
     }
 }
 

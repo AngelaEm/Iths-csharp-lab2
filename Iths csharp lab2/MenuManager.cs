@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Iths_csharp_lab2
 {
-    internal class MenuManager
+    internal static class MenuManager
     {
         // Arrays with mainmenu options and usermenu options
-        public static string[] mainMenuChoices = { "Log in", "Register", "Admin Login", "Exit" };
-        public static string[] userMenuChoices = { "Shop", "See cart", "Pay", "Log out" };
+        public static string[] mainMenuChoices = { "Log in", "Register", "Exit" };
+        public static string[] userMenuChoices = { "Shop", "My settings and cart", "Checkout", "Log out" };
 
 
         /// <summary>
@@ -110,33 +110,11 @@ namespace Iths_csharp_lab2
                     break;
 
                 case 2:
-                    // Display all members, passwords and carts to admin. Password 123
-                    Console.WriteLine("\n****************************\n");
-                    Console.WriteLine("\nWrite password to see all customers, passwords and shoppingcarts.\n");
-                    Console.CursorVisible = true;
-                    string password = Console.ReadLine();
-
-                    if (password == "123")
-                    {
-                        Console.Clear();
-                        Console.WriteLine("\n****************************\n");
-                        Member.PrintAllMembers();
-                        Console.CursorVisible = false;
-                        MenuManager.MainMenu(MenuManager.MenuDesign(mainMenuChoices));
-                    }
-
-                    Console.CursorVisible = false;
-                    Console.WriteLine("Invalid password.");
-                    Console.ReadKey();                   
-                    MenuManager.MainMenu(MenuManager.MenuDesign(mainMenuChoices));                   
-
-                    break;
-
-                case 3:
 
                     Environment.Exit(0);
 
                     break;
+    
             }
         }
 
@@ -244,7 +222,7 @@ namespace Iths_csharp_lab2
 
                 case 4:
 
-                    Console.WriteLine("\nReturning to the logged in menu.");
+                    Console.WriteLine("\nPress enter to return to the logged in menu.");
                     Console.ReadKey();
                     
                     MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
@@ -254,6 +232,5 @@ namespace Iths_csharp_lab2
             }
         }
     }
-
 }
 

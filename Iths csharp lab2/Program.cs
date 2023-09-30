@@ -12,8 +12,6 @@ namespace Iths_csharp_lab2
     internal class Program
     {
 
-        public static List<Customer> ListWithCustomers;
-
         static void Main(string[] args)
         {
           
