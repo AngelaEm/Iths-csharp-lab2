@@ -46,7 +46,7 @@ namespace Iths_csharp_lab2
                 Console.WriteLine($"\nTo pay: {Math.Round(member.TotalPrice, 4)} SEK.\n");
 
                 // Calculate members discountprice
-                discountPrice = BonusDiscount(member);
+                discountPrice = member.BonusDiscount();
 
                 // Display discountprice
                 Console.WriteLine($"To pay as {member.Level}-member: {discountPrice} SEK.\n");
@@ -89,83 +89,7 @@ namespace Iths_csharp_lab2
 
                 PayAndRemove(member, member.GetCart());
             }         
-        }
-
-        /// <summary>
-        /// Calculates discount depending on membershiplevel
-        /// </summary>
-        /// <param name="member">Logged in member</param>
-        /// <returns>Total proce after discount</returns>
-        public static double BonusDiscount(Member member)
-        {
-
-            double discountPrice = 0;
-
-            switch (member.Level)
-            {
-                case MembershipLevel.Gold:
-
-                    return Gold(member.TotalPrice);
-
-                case MembershipLevel.Silver:
-
-                    return Silver(member.TotalPrice);
-
-                case MembershipLevel.Bronze:
-
-                    return Bronze(member.TotalPrice);
-
-                case MembershipLevel.None:
-                    
-                    return member.TotalPrice;
-
-                default:
-
-                    return discountPrice;
-            }
-        }
-
-
-        /// <summary>
-        /// Calculates new Total price after discount with Gold membership
-        /// </summary>
-        /// <param name="totalPrice">Total price</param>
-        /// <returns>Total price after discount in SEK</returns>
-        private static double Gold(double totalPrice)
-        {
-            double discount = (int)MembershipLevel.Gold / 100.0;
-            double discountPrice = totalPrice * discount;
-            return Math.Round(discountPrice, 2);
-        }
-
-
-        /// <summary>
-        /// Calculates new Total price after discount with Silver membership
-        /// </summary>
-        /// <param name="totalPrice">Total price</param>
-        /// <returns>Total price after discount in SEK</returns>
-        private static double Silver(double totalPrice)
-        {
-            double discount = (int)MembershipLevel.Silver / 100.0;
-            double discountPrice = totalPrice * discount;
-            return Math.Round(discountPrice, 2);
-
-
-        }
-
-
-        /// <summary>
-        /// Calculates new Total price after discount with Bronze membership
-        /// </summary>
-        /// <param name="totalPrice">Total price</param>
-        /// <returns>Total price after discount in SEK</returns>
-        private static double Bronze(double totalPrice)
-        {
-            double discount = (int)MembershipLevel.Bronze / 100.0;
-            double discountPrice = totalPrice * discount;
-            return Math.Round(discountPrice, 2);
-
-        }
+        }     
 
 
         /// <summary>

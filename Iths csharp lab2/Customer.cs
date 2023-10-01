@@ -13,7 +13,7 @@ namespace Iths_csharp_lab2
         // Fields
         private string _userName;
         private string _password;
-        private double _totalPrice;
+        private double _totalPrice = 0;
         private List<Product> _shoppingCart;
 
 
@@ -55,9 +55,7 @@ namespace Iths_csharp_lab2
         public static List<Customer> ListWithCustomers = new List<Customer>();
 
 
-        // Method           
-
-
+        
         /// <summary>
         /// Get the customers shopping cart.
         /// </summary>

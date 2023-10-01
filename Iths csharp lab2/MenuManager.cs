@@ -94,7 +94,10 @@ namespace Iths_csharp_lab2
         /// <param name="menuSelected">Index of selected option</param>
         public static void MainMenu(int menuSelected)
         {
+           
+
             switch (menuSelected)
+
             {
                 case 0:
 
@@ -140,22 +143,22 @@ namespace Iths_csharp_lab2
 
                 case 1:
 
-                    CartManager.PrintCart(member);
+                    member.PrintCart(member);
                     Console.ReadKey(true);
-                    MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
+                    UserMenu(member, MenuDesign(userMenuChoices));
                     
                     break;
 
                 case 2:
 
                     PaymentManager.CheckOut(member);                 
-                    MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
+                    UserMenu(member, MenuDesign(userMenuChoices));
 
                     break;
 
                 case 3:
                    
-                    MenuManager.MainMenu(MenuManager.MenuDesign(mainMenuChoices));
+                    MainMenu(MenuDesign(mainMenuChoices));
 
                     break;
 
@@ -198,26 +201,26 @@ namespace Iths_csharp_lab2
             {
                 case 0:
 
-                    CartManager.AddToCart(Product.listWithProducts[0], member);
+                    Product.listWithProducts[0].AddToCart(member);
                     
                     break;
 
                 case 1:
 
-                    CartManager.AddToCart(Product.listWithProducts[1], member);
+                    Product.listWithProducts[1].AddToCart(member);
 
                     break;
 
                 case 2:
 
-                    CartManager.AddToCart(Product.listWithProducts[2], member);                  
+                    Product.listWithProducts[2].AddToCart(member);
 
                     break;
 
                 case 3:
 
-                    CartManager.AddToCart(Product.listWithProducts[3], member);
-                    
+                    Product.listWithProducts[3].AddToCart(member);
+
                     break;
 
                 case 4:
@@ -225,7 +228,7 @@ namespace Iths_csharp_lab2
                     Console.WriteLine("\nPress enter to return to the logged in menu.");
                     Console.ReadKey(true);
                     
-                    MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
+                    UserMenu(member, MenuDesign(userMenuChoices));
 
                     break;
 

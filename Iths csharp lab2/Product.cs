@@ -36,6 +36,28 @@ namespace Iths_csharp_lab2
 
 
         /// <summary>
+        /// Adds product to customers cart and updates totalPrice.
+        /// </summary>
+        /// <param name="product">The product to be added</param>
+        /// <param name="customer">The logged in customer</param>
+        public void AddToCart(Member member)
+        {
+            // Add products to members cart
+            member.GetCart().Add(this);
+
+            // Increase totalPrice
+            member.TotalPrice += Price;
+
+            Console.WriteLine($"\n\tAdded to cart.\tTotal price: {Math.Round(member.TotalPrice, 2)} SEK");
+            Console.WriteLine("\tPress enter to continue.");
+            Console.ReadKey();
+
+            MenuManager.ProductMenu(member, MenuManager.MenuDesign(MenuManager.GetArrayWithProducts()));
+
+        }
+
+
+        /// <summary>
         /// Displays information about product
         /// </summary>
         /// <returns>Product name and price</returns>

@@ -37,8 +37,8 @@ namespace Iths_csharp_lab2
             get { return _level; }
             private set { _level = value; }
         }
-      
 
+        
         // Methods
         /// <summary>
         /// Controls if username matches password and let customer log in if they match.
@@ -209,6 +209,127 @@ namespace Iths_csharp_lab2
             
             // Main menu
             MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
+
+        }
+
+
+        /// <summary>
+        /// Displays customers shopping cart with products, number of products, price and total price.
+        /// </summary>
+        /// <param name="customer">The logged in user</param>
+        public void PrintCart(Member member)
+        {
+            Console.Clear();
+            Console.WriteLine("\n*********************************************************\n");
+            Console.WriteLine("Your settings:\n");
+            // Runs if cart is empty
+            if (GetCart().Count == 0)
+            {
+                Console.WriteLine(ToString());
+                Console.WriteLine("\n**************************\n");
+                Console.WriteLine("Yor cart is currently empty.");
+                Console.WriteLine("\n**************************\n");
+                Console.ReadKey();
+
+                MenuManager.UserMenu(member, MenuManager.MenuDesign(MenuManager.userMenuChoices));
+            }
+
+
+            // Group the products in cart by name and price.
+            var groupedCart = GetCart().GroupBy(product => new { product.ProductName, product.Price });
+            int totalCount = 0;
+
+            Console.WriteLine(ToString());
+
+            // Displays details about the grouped cart.
+            foreach (var group in groupedCart)
+            {
+                string productName = group.Key.ProductName;
+                double price = group.Key.Price;
+                int count = group.Count();
+                double total = price * count;
+                total = Math.Round(total, 4);
+                totalCount += count;
+
+                Console.WriteLine($"{productName}\tat {price} SEK\tQuantity: {count}\ttotal: {total} SEK");
+
+            }
+
+            Console.WriteLine("\n*********************************************************\n");
+            Console.WriteLine($"\nTotal price: {Math.Round(TotalPrice, 2)} kr. Total number of products in cart {totalCount}");
+
+        }
+
+
+        /// <summary>
+        /// Calculates discount depending on membershiplevel
+        /// </summary>
+        /// <returns>Total proce after discount</returns>
+        public double BonusDiscount()
+        {
+
+            double discountPrice = 0;
+
+            switch (Level)
+            {
+                case MembershipLevel.Gold:
+
+                    return Gold();
+
+                case MembershipLevel.Silver:
+
+                    return Silver();
+
+                case MembershipLevel.Bronze:
+
+                    return Bronze();
+
+                case MembershipLevel.None:
+
+                    return TotalPrice;
+
+                default:
+
+                    return discountPrice;
+            }
+        }
+
+
+        /// <summary>
+        /// Calculates new Total price after discount with Gold membership
+        /// </summary>
+        /// <returns>Total price after discount in SEK</returns>
+        private double Gold()
+        {
+            double discount = (int)MembershipLevel.Gold / 100.0;
+            double discountPrice = TotalPrice * discount;
+            return Math.Round(discountPrice, 2);
+        }
+
+
+        /// <summary>
+        /// Calculates new Total price after discount with Silver membership
+        /// </summary>       
+        /// <returns>Total price after discount in SEK</returns>
+        private double Silver()
+        {
+            double discount = (int)MembershipLevel.Silver / 100.0;
+            double discountPrice = TotalPrice * discount;
+            return Math.Round(discountPrice, 2);
+
+
+        }
+
+
+        /// <summary>
+        /// Calculates new Total price after discount with Bronze membership
+        /// </summary>
+        /// <returns>Total price after discount in SEK</returns>
+        private double Bronze()
+        {
+            double discount = (int)MembershipLevel.Bronze / 100.0;
+            double discountPrice = TotalPrice * discount;
+            return Math.Round(discountPrice, 2);
 
         }
 
