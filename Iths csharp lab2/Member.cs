@@ -206,7 +206,8 @@ namespace Iths_csharp_lab2
                 Member newMember = new Member(userName, password, level);
 
                 // Save customer to textfile
-                string fileName = "textFile.txt";
+                string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "textFile.txt");
+                
                 File.AppendAllText(fileName, $"{userName},{password},{level}\n");
                      
                 

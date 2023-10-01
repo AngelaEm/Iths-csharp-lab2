@@ -16,9 +16,10 @@ namespace Iths_csharp_lab2
           
             // Displays welcomemessage and initializes four products
             MenuManager.Start();
-            
+
             // Variable holding my textfile with logged in members
-            string fileName = "textFile.txt";
+            string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "textFile.txt");
+            
             
             // Upload members from textfile to listWithCustomers
             UploadCustomersFromTextFile(fileName);
