@@ -206,7 +206,7 @@ namespace Iths_csharp_lab2
                 Member newMember = new Member(userName, password, level);
 
                 // Save customer to textfile
-                string fileName = "https://github.com/AngelaEm/Iths-csharp-lab2/blob/master/Iths%20csharp%20lab2/textFile.txt";
+                string fileName = "textFile.txt";
                 File.AppendAllText(fileName, $"{userName},{password},{level}\n");
                      
                 
