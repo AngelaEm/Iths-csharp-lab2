@@ -18,7 +18,7 @@ namespace Iths_csharp_lab2
             MenuManager.Start();
             
             // Variable holding my textfile with logged in members
-            string fileName = "textFile.txt";
+            string fileName = "https://github.com/AngelaEm/Iths-csharp-lab2/blob/master/Iths%20csharp%20lab2/textFile.txt";
             
             // Upload members from textfile to listWithCustomers
             UploadCustomersFromTextFile(fileName);
