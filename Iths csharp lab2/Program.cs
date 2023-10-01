@@ -11,11 +11,10 @@ namespace Iths_csharp_lab2
 { 
     internal class Program
     {
-
         static void Main(string[] args)
         {
           
-            // Displays welcomemessage and initializes three members and four products
+            // Displays welcomemessage and initializes four products
             MenuManager.Start();
             
             // Variable holding my textfile with logged in members
@@ -56,7 +55,6 @@ namespace Iths_csharp_lab2
                         string userName = userData[0];
                         string password = userData[1];
                         string level = userData[2];
-
                        
 
                         // Set member to correct level

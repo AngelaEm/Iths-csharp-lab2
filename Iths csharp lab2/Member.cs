@@ -43,9 +43,9 @@ namespace Iths_csharp_lab2
         /// <summary>
         /// Controls if username matches password and let customer log in if they match.
         /// </summary>
-        /// <param name="userName">Name of the customer.</param>
-        /// <param name="password">Password of the customer.</param>
-        /// <returns>Customer if username and password match and null if they dont match.</returns>
+        /// <param name="userName">Username of customer.</param>
+        /// <param name="password">Password of customer.</param>
+        /// <returns>Member if username and password match and null if they dont match.</returns>
         public static Member TestIfMemberExist(string userName, string password)
         {
             // Iterates through ListWithCustomer to see if customer is a member and return member if true
@@ -53,8 +53,10 @@ namespace Iths_csharp_lab2
             {
                 if (member.UserName == userName && member.Password == password)
                 {
+                    Console.CursorVisible = false;
                     Console.WriteLine($"\nWelcome {member.UserName}!");
-                    Console.ReadKey();
+                    Console.WriteLine("Press enter to continue.");
+                    Console.ReadKey(true);
                     return member;
                 }
             }
@@ -143,8 +145,10 @@ namespace Iths_csharp_lab2
                 if (member.UserName == userName)
                 {
                     Console.WriteLine("This customer already exists! Press enter to try again.");
-                    Console.ReadKey();
-                    Register();
+                    Console.CursorVisible = false;
+                    Console.ReadKey(true);
+                    MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
+                    
                 }
             }
 
@@ -154,9 +158,8 @@ namespace Iths_csharp_lab2
             Member.MembershipLevel level = Member.MembershipLevel.None;
             Console.WriteLine("\nEnter your memberpoints 0-1000.\n");
 
-            try
+            if (int.TryParse(Console.ReadLine(), out int points))
             {
-                int points = int.Parse(Console.ReadLine());
                 if (points >= 0 && points < 100)
                 {
                     level = Member.MembershipLevel.None;
@@ -182,13 +185,9 @@ namespace Iths_csharp_lab2
                     Console.WriteLine("\nPlease choose a number 0-1000.");
                 }
             }
-            catch (Exception)
-            {
+          
 
-                Console.WriteLine("Invalid choice, please write a number 0-1000");
-            }
-
-            Console.ReadKey();
+            Console.ReadKey(true);
 
 
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
@@ -204,12 +203,12 @@ namespace Iths_csharp_lab2
             else
             {
                 Console.WriteLine("\nInvalid username or password! Please try again.");
-                Console.ReadKey();              
+                Console.ReadKey(true);              
                 
-            }
-
-                // Main menu
-                MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
+            }    
+            
+            // Main menu
+            MenuManager.MainMenu(MenuManager.MenuDesign(MenuManager.mainMenuChoices));
 
         }
 

@@ -42,8 +42,6 @@ namespace Iths_csharp_lab2
         public override string ToString()
         {
             return ProductName + "     " + Price;
-        }
-
-        
+        }      
     }
 }

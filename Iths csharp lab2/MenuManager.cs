@@ -26,7 +26,7 @@ namespace Iths_csharp_lab2
             Console.WriteLine("\n********************************\n");
             Console.WriteLine("Press enter to get to the menu.");
 
-            Console.ReadKey();
+            Console.ReadKey(true);
             Console.ResetColor();
            
             Product redBull = new Product("Red Bull", 13.95);
@@ -67,7 +67,7 @@ namespace Iths_csharp_lab2
                 }
 
                 // Naviagte with up and down-arrows
-                var keyPressed = Console.ReadKey();
+                var keyPressed = Console.ReadKey(true);
 
                 if (keyPressed.Key == ConsoleKey.DownArrow && menuSelected != menuChoices.Length - 1)
                 {
@@ -141,7 +141,7 @@ namespace Iths_csharp_lab2
                 case 1:
 
                     CartManager.PrintCart(member);
-                    Console.ReadKey();
+                    Console.ReadKey(true);
                     MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
                     
                     break;
@@ -223,7 +223,7 @@ namespace Iths_csharp_lab2
                 case 4:
 
                     Console.WriteLine("\nPress enter to return to the logged in menu.");
-                    Console.ReadKey();
+                    Console.ReadKey(true);
                     
                     MenuManager.UserMenu(member, MenuManager.MenuDesign(userMenuChoices));
 
