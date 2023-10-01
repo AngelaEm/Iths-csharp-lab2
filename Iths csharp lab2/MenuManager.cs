@@ -14,7 +14,7 @@ namespace Iths_csharp_lab2
 
 
         /// <summary>
-        /// Displays welcome message and initalizes three customers and four products at start.
+        /// Displays welcome message and initalizes four products at start.
         /// </summary>
         public static void Start()
         {

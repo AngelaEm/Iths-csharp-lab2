@@ -38,8 +38,7 @@ namespace Iths_csharp_lab2
         /// <summary>
         /// Adds product to customers cart and updates totalPrice.
         /// </summary>
-        /// <param name="product">The product to be added</param>
-        /// <param name="customer">The logged in customer</param>
+        /// <param name="member">The logged in member</param>
         public void AddToCart(Member member)
         {
             // Add products to members cart

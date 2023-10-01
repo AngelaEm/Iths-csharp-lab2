@@ -160,34 +160,45 @@ namespace Iths_csharp_lab2
 
             if (int.TryParse(Console.ReadLine(), out int points))
             {
-                if (points >= 0 && points < 100)
+                if (points >= 0 && points <= 1000)
                 {
-                    level = Member.MembershipLevel.None;
-                    Console.WriteLine("\nYou have no bonus yet. Keep shopping to get to the next level!\n");
-                }
-                else if (points >= 100 && points < 500)
-                {
-                    level = Member.MembershipLevel.Bronze;
-                    Console.WriteLine($"\nYou are {Member.MembershipLevel.Bronze} member and get a discount of {100 - (int)Member.MembershipLevel.Bronze}%.");
-                }
-                else if (points >= 500 && points < 850)
-                {
-                    level = Member.MembershipLevel.Silver;
-                    Console.WriteLine($"\nYou are {Member.MembershipLevel.Silver} member and get a discount of {100 - (int)Member.MembershipLevel.Silver}%.");
-                }
-                else if (points >= 850 && points <= 1000)
-                {
-                    level = Member.MembershipLevel.Gold;
-                    Console.WriteLine($"\nYou are {Member.MembershipLevel.Gold} member and get a discount of {100 - (int)Member.MembershipLevel.Gold}%.");
+                    if (points >= 0 && points < 100)
+                    {
+                        level = Member.MembershipLevel.None;
+                        Console.WriteLine("\nYou have no bonus yet. Keep shopping to get to the next level!\n");
+                    }
+                    else if (points >= 100 && points < 500)
+                    {
+                        level = Member.MembershipLevel.Bronze;
+                        Console.WriteLine($"\nYou are {Member.MembershipLevel.Bronze} member and get a discount of {100 - (int)Member.MembershipLevel.Bronze}%.");
+                    }
+                    else if (points >= 500 && points < 850)
+                    {
+                        level = Member.MembershipLevel.Silver;
+                        Console.WriteLine($"\nYou are {Member.MembershipLevel.Silver} member and get a discount of {100 - (int)Member.MembershipLevel.Silver}%.");
+                    }
+                    else if (points >= 850 && points <= 1000)
+                    {
+                        level = Member.MembershipLevel.Gold;
+                        Console.WriteLine($"\nYou are {Member.MembershipLevel.Gold} member and get a discount of {100 - (int)Member.MembershipLevel.Gold}%.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nPlease choose a number between 0-1000.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("\nPlease choose a number 0-1000.");
-                }
+                    Console.WriteLine("\nPlease choose a number between 0-1000.");
+                }               
+            }
+            else
+            {
+                Console.WriteLine("\nInvalid input. Please try again.");
             }
           
 
-            Console.ReadKey(true);
+            Console.ReadKey();
 
 
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
@@ -216,7 +227,7 @@ namespace Iths_csharp_lab2
         /// <summary>
         /// Displays customers shopping cart with products, number of products, price and total price.
         /// </summary>
-        /// <param name="customer">The logged in user</param>
+        /// <param name="member">The logged in user</param>
         public void PrintCart(Member member)
         {
             Console.Clear();
@@ -264,11 +275,9 @@ namespace Iths_csharp_lab2
         /// <summary>
         /// Calculates discount depending on membershiplevel
         /// </summary>
-        /// <returns>Total proce after discount</returns>
+        /// <returns>Total price after discount</returns>
         public double BonusDiscount()
         {
-
-            double discountPrice = 0;
 
             switch (Level)
             {
@@ -287,11 +296,9 @@ namespace Iths_csharp_lab2
                 case MembershipLevel.None:
 
                     return TotalPrice;
-
-                default:
-
-                    return discountPrice;
+              
             }
+            return TotalPrice;
         }
 
 
@@ -316,7 +323,6 @@ namespace Iths_csharp_lab2
             double discount = (int)MembershipLevel.Silver / 100.0;
             double discountPrice = TotalPrice * discount;
             return Math.Round(discountPrice, 2);
-
 
         }
 

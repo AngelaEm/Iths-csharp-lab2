@@ -95,7 +95,6 @@ namespace Iths_csharp_lab2
         /// <summary>
         /// Convert price from SEK to USD
         /// </summary>
-        /// <param name="customer">price to convert</param>
         /// <returns>Price (double) in USD</returns>
         private static double ConvertToDollar(double price)
         {
@@ -108,7 +107,6 @@ namespace Iths_csharp_lab2
         /// <summary>
         /// Convert price from SEK to EUR
         /// </summary>
-        /// <param name="customer">double price</param>
         /// <returns>Price (double) in EUR</returns>
         private static double ConvertToEuro(double price)
         {

@@ -30,10 +30,10 @@ namespace Iths_csharp_lab2
     
 
         /// <summary>
-        /// Gets customers that are saved in textfile.
+        /// Initializes customers that are saved in textfile.
         /// </summary>
         /// <param name="fileName">Name of textfile to read from</param>
-        /// <returns>A list of Customers saved in file</returns>
+        
         public static void UploadCustomersFromTextFile(string fileName)
         {
 
