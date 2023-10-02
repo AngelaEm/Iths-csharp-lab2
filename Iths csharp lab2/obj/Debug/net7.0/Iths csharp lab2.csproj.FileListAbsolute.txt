@@ -1,0 +1,31 @@
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.exe
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.deps.json
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.runtimeconfig.json
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.dll
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.pdb
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.csproj.AssemblyReference.cache
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.AssemblyInfoInputs.cache
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.AssemblyInfo.cs
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.csproj.CoreCompileInputs.cache
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.dll
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\refint\Iths csharp lab2.dll
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.pdb
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.genruntimeconfig.cache
+C:\Users\Angela\source\repos\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\ref\Iths csharp lab2.dll
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.exe
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.deps.json
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.runtimeconfig.json
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.dll
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\Iths csharp lab2.pdb
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.csproj.AssemblyReference.cache
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.AssemblyInfoInputs.cache
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.AssemblyInfo.cs
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.csproj.CoreCompileInputs.cache
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.dll
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\refint\Iths csharp lab2.dll
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.pdb
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\Iths csharp lab2.genruntimeconfig.cache
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\obj\Debug\net7.0\ref\Iths csharp lab2.dll
+C:\Users\Angela\OneDrive\0 IT-höskolan\c#\Iths csharp lab2\Iths csharp lab2\bin\Debug\net7.0\textFile.txt

@@ -1,0 +1,6 @@
+﻿Angela,12345,Silver
+Knatte,123,Gold
+Fnatte,321,Silver
+Tjatte,213,Bronze
+Mio,54321,None
+Angie,333,Silver
